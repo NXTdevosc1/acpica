@@ -5,34 +5,63 @@
       <Configuration>Debug</Configuration>
       <Platform>Win32</Platform>
     </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
     <ProjectConfiguration Include="Release|Win32">
       <Configuration>Release</Configuration>
       <Platform>Win32</Platform>
     </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
     <ProjectConfiguration Include="Template|Win32">
       <Configuration>Template</Configuration>
       <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Template|x64">
+      <Configuration>Template</Configuration>
+      <Platform>x64</Platform>
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <SccProjectName />
     <SccLocalPath />
     <ProjectGuid>{768B4FF9-311F-44F1-B0FC-41CC5A9A5053}</ProjectGuid>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Template|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
-    <PlatformToolset>v141</PlatformToolset>
+    <PlatformToolset>v143</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Template|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
-    <PlatformToolset>v141</PlatformToolset>
+    <PlatformToolset>v143</PlatformToolset>
+    <UseOfMfc>false</UseOfMfc>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
     <UseOfMfc>false</UseOfMfc>
     <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
-    <PlatformToolset>v141</PlatformToolset>
+    <PlatformToolset>v143</PlatformToolset>
+    <UseOfMfc>false</UseOfMfc>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
     <UseOfMfc>false</UseOfMfc>
     <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
@@ -42,11 +71,22 @@
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Template|Win32'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Template|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
   <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="PropertySheets">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
     <Import Project="$(VCTargetsPath)Microsoft.Cpp.UpgradeFromVC60.props" />
   </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="$(VCTargetsPath)Microsoft.Cpp.UpgradeFromVC60.props" />
+  </ImportGroup>
   <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="$(VCTargetsPath)Microsoft.Cpp.UpgradeFromVC60.props" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="PropertySheets">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
     <Import Project="$(VCTargetsPath)Microsoft.Cpp.UpgradeFromVC60.props" />
   </ImportGroup>
@@ -56,9 +96,15 @@
     <IntDir>.\AcpiSubsystemDebug\</IntDir>
     <LinkIncremental>true</LinkIncremental>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <OutDir>.\AcpiSubsystem\</OutDir>
     <IntDir>.\AcpiSubsystem\</IntDir>
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
@@ -82,6 +128,55 @@
       <CallingConvention>FastCall</CallingConvention>
       <CompileAs>CompileAsC</CompileAs>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <ExceptionHandling>false</ExceptionHandling>
+      <BufferSecurityCheck>false</BufferSecurityCheck>
+      <EnableEnhancedInstructionSet>NotSet</EnableEnhancedInstructionSet>
+    </ClCompile>
+    <PreLinkEvent>
+      <Command>if NOT EXIST ..\..\libraries mkdir ..\..\libraries</Command>
+      <Message>Checking existence of acpica/libraries directory</Message>
+    </PreLinkEvent>
+    <PostBuildEvent>
+      <Command>copy acpisubsystemdebug\acpisubsystem.lib ..\..\libraries\acpica_dbg.lib</Command>
+      <Message>Copying libacpica to libraries...</Message>
+    </PostBuildEvent>
+    <ResourceCompile>
+      <Culture>0x0409</Culture>
+    </ResourceCompile>
+    <Bscmake>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <OutputFile>.\AcpiSubsystemDebug\AcpiSubsystem.bsc</OutputFile>
+      <AdditionalOptions> /o"/acpica/generate/msvc2017/AcpiSubsystemDebug/AcpiSubsystem.bsc" </AdditionalOptions>
+    </Bscmake>
+    <Lib>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <OutputFile>.\AcpiSubsystemDebug\AcpiSubsystem.lib</OutputFile>
+    </Lib>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+      <InlineFunctionExpansion>OnlyExplicitInline</InlineFunctionExpansion>
+      <FunctionLevelLinking>false</FunctionLevelLinking>
+      <Optimization>Disabled</Optimization>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <WarningLevel>Level4</WarningLevel>
+      <MinimalRebuild>false</MinimalRebuild>
+      <OmitFramePointers>false</OmitFramePointers>
+      <StringPooling>true</StringPooling>
+      <AdditionalIncludeDirectories>..\..\source\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>NDEBUG;WIN32;_CONSOLE;__STDC__;ACPI_LIBRARY;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AssemblerListingLocation>.\AcpiSubsystemDebug\</AssemblerListingLocation>
+      <PrecompiledHeaderOutputFile>.\AcpiSubsystemDebug\AcpiSubsystem.pch</PrecompiledHeaderOutputFile>
+      <ObjectFileName>.\AcpiSubsystemDebug\</ObjectFileName>
+      <ProgramDataBaseFileName>.\AcpiSubsystemDebug\</ProgramDataBaseFileName>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <CallingConvention>FastCall</CallingConvention>
+      <CompileAs>CompileAsC</CompileAs>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <ExceptionHandling>false</ExceptionHandling>
+      <BufferSecurityCheck>false</BufferSecurityCheck>
+      <EnableEnhancedInstructionSet>NotSet</EnableEnhancedInstructionSet>
     </ClCompile>
     <PreLinkEvent>
       <Command>if NOT EXIST ..\..\libraries mkdir ..\..\libraries</Command>
@@ -125,6 +220,9 @@
       <CompileAs>CompileAsC</CompileAs>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <ControlFlowGuard>Guard</ControlFlowGuard>
+      <ExceptionHandling>false</ExceptionHandling>
+      <BufferSecurityCheck>false</BufferSecurityCheck>
+      <EnableEnhancedInstructionSet>NotSet</EnableEnhancedInstructionSet>
     </ClCompile>
     <PreLinkEvent>
       <Command>if NOT EXIST ..\..\libraries mkdir ..\..\libraries</Command>
@@ -146,9 +244,98 @@
       <OutputFile>.\AcpiSubsystem\AcpiSubsystem.lib</OutputFile>
     </Lib>
   </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <InlineFunctionExpansion>OnlyExplicitInline</InlineFunctionExpansion>
+      <FunctionLevelLinking>false</FunctionLevelLinking>
+      <Optimization>MaxSpeed</Optimization>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <WarningLevel>Level4</WarningLevel>
+      <StringPooling>true</StringPooling>
+      <AdditionalIncludeDirectories>..\..\source\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>NDEBUG;WIN64;_CONSOLE;__STDC__;ACPI_LIBRARY;ACPI_DISASSEMBLER;ACPI_DEBUG_OUTPUT;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AssemblerListingLocation>.\AcpiSubsystem\</AssemblerListingLocation>
+      <PrecompiledHeaderOutputFile>.\AcpiSubsystem\AcpiSubsystem.pch</PrecompiledHeaderOutputFile>
+      <ObjectFileName>.\AcpiSubsystem\</ObjectFileName>
+      <ProgramDataBaseFileName>.\AcpiSubsystem\</ProgramDataBaseFileName>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <ConformanceMode>true</ConformanceMode>
+      <CallingConvention>FastCall</CallingConvention>
+      <CompileAs>CompileAsC</CompileAs>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <ControlFlowGuard>Guard</ControlFlowGuard>
+      <ExceptionHandling>false</ExceptionHandling>
+      <BufferSecurityCheck>false</BufferSecurityCheck>
+      <EnableEnhancedInstructionSet>NotSet</EnableEnhancedInstructionSet>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+    </ClCompile>
+    <PreLinkEvent>
+      <Command>if NOT EXIST ..\..\libraries mkdir ..\..\libraries</Command>
+      <Message>Checking existence of acpica/libraries directory</Message>
+    </PreLinkEvent>
+    <PostBuildEvent>
+      <Command>copy acpisubsystem\acpisubsystem.lib ..\..\libraries\acpica.lib</Command>
+      <Message>Copying libacpica to libraries...</Message>
+    </PostBuildEvent>
+    <ResourceCompile>
+      <Culture>0x0409</Culture>
+      <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ResourceCompile>
+    <Bscmake>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <OutputFile>.\AcpiSubsystem\AcpiSubsystem.bsc</OutputFile>
+    </Bscmake>
+    <Lib>
+      <OutputFile>.\AcpiSubsystem\AcpiSubsystem.lib</OutputFile>
+    </Lib>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Template|Win32'">
+    <ClCompile>
+      <ExceptionHandling>false</ExceptionHandling>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Template|Win32'">
+    <ClCompile>
+      <BufferSecurityCheck>false</BufferSecurityCheck>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Template|Win32'">
+    <ClCompile>
+      <EnableEnhancedInstructionSet>NotSet</EnableEnhancedInstructionSet>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Template|x64'">
+    <ClCompile>
+      <ExceptionHandling>false</ExceptionHandling>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Template|x64'">
+    <ClCompile>
+      <BufferSecurityCheck>false</BufferSecurityCheck>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Template|x64'">
+    <ClCompile>
+      <EnableEnhancedInstructionSet>NotSet</EnableEnhancedInstructionSet>
+    </ClCompile>
+  </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\source\common\acfileio.c" />
+    <ClCompile Include="..\..\source\common\acgetline.c" />
+    <ClCompile Include="..\..\source\common\adwalk.c" />
     <ClCompile Include="..\..\source\common\ahids.c" />
+    <ClCompile Include="..\..\source\common\ahpredef.c" />
+    <ClCompile Include="..\..\source\common\ahtable.c" />
+    <ClCompile Include="..\..\source\common\ahuuids.c" />
     <ClCompile Include="..\..\source\common\cmfsize.c" />
+    <ClCompile Include="..\..\source\common\dmswitch.c" />
+    <ClCompile Include="..\..\source\common\dmtbinfo.c" />
+    <ClCompile Include="..\..\source\common\dmtbinfo1.c" />
+    <ClCompile Include="..\..\source\common\dmtbinfo2.c" />
+    <ClCompile Include="..\..\source\common\dmtbinfo3.c" />
+    <ClCompile Include="..\..\source\common\getopt.c" />
     <ClCompile Include="..\..\source\COMPONENTS\DEBUGGER\dbcmds.c" />
     <ClCompile Include="..\..\source\components\debugger\dbconvert.c" />
     <ClCompile Include="..\..\source\COMPONENTS\DEBUGGER\dbdisply.c" />
@@ -164,6 +351,7 @@
     <ClCompile Include="..\..\source\COMPONENTS\DEBUGGER\dbutils.c" />
     <ClCompile Include="..\..\source\COMPONENTS\DEBUGGER\dbxface.c" />
     <ClCompile Include="..\..\source\COMPONENTS\Disassembler\dmbuffer.c" />
+    <ClCompile Include="..\..\source\components\disassembler\dmcstyle.c" />
     <ClCompile Include="..\..\source\components\disassembler\dmdeferred.c" />
     <ClCompile Include="..\..\source\COMPONENTS\Disassembler\dmnames.c" />
     <ClCompile Include="..\..\source\COMPONENTS\Disassembler\dmopcode.c" />
@@ -175,12 +363,14 @@
     <ClCompile Include="..\..\source\COMPONENTS\Disassembler\dmwalk.c" />
     <ClCompile Include="..\..\source\components\dispatcher\dsargs.c" />
     <ClCompile Include="..\..\source\components\dispatcher\dscontrol.c" />
+    <ClCompile Include="..\..\source\components\dispatcher\dsdebug.c" />
     <ClCompile Include="..\..\source\components\dispatcher\dsfield.c" />
     <ClCompile Include="..\..\source\components\dispatcher\dsinit.c" />
     <ClCompile Include="..\..\source\components\dispatcher\dsmethod.c" />
     <ClCompile Include="..\..\source\components\dispatcher\dsmthdat.c" />
     <ClCompile Include="..\..\source\components\dispatcher\dsobject.c" />
     <ClCompile Include="..\..\source\components\dispatcher\dsopcode.c" />
+    <ClCompile Include="..\..\source\components\dispatcher\dspkginit.c" />
     <ClCompile Include="..\..\source\components\dispatcher\dsutils.c" />
     <ClCompile Include="..\..\source\components\dispatcher\dswexec.c" />
     <ClCompile Include="..\..\source\components\dispatcher\dswload.c" />
@@ -202,6 +392,7 @@
     <ClCompile Include="..\..\source\components\events\evxfevnt.c" />
     <ClCompile Include="..\..\source\components\events\evxfgpe.c" />
     <ClCompile Include="..\..\source\components\events\evxfregn.c" />
+    <ClCompile Include="..\..\source\components\executer\exconcat.c" />
     <ClCompile Include="..\..\source\components\executer\exconfig.c" />
     <ClCompile Include="..\..\source\components\executer\exconvrt.c" />
     <ClCompile Include="..\..\source\components\executer\excreate.c" />
@@ -221,6 +412,7 @@
     <ClCompile Include="..\..\source\components\executer\exresnte.c" />
     <ClCompile Include="..\..\source\components\executer\exresolv.c" />
     <ClCompile Include="..\..\source\components\executer\exresop.c" />
+    <ClCompile Include="..\..\source\components\executer\exserial.c" />
     <ClCompile Include="..\..\source\components\executer\exstore.c" />
     <ClCompile Include="..\..\source\components\executer\exstoren.c" />
     <ClCompile Include="..\..\source\components\executer\exstorob.c" />
@@ -234,7 +426,9 @@
     <ClCompile Include="..\..\source\components\hardware\hwsleep.c" />
     <ClCompile Include="..\..\source\components\hardware\hwtimer.c">
       <DisableLanguageExtensions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</DisableLanguageExtensions>
+      <DisableLanguageExtensions Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</DisableLanguageExtensions>
       <DisableLanguageExtensions Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</DisableLanguageExtensions>
+      <DisableLanguageExtensions Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</DisableLanguageExtensions>
     </ClCompile>
     <ClCompile Include="..\..\source\components\hardware\hwvalid.c" />
     <ClCompile Include="..\..\source\components\hardware\hwxface.c" />
@@ -297,6 +491,7 @@
     <ClCompile Include="..\..\source\components\tables\tbxfroot.c" />
     <ClCompile Include="..\..\source\components\utilities\utaddress.c" />
     <ClCompile Include="..\..\source\components\utilities\utalloc.c" />
+    <ClCompile Include="..\..\source\components\utilities\utascii.c" />
     <ClCompile Include="..\..\source\components\utilities\utbuffer.c" />
     <ClCompile Include="..\..\source\components\utilities\utcache.c" />
     <ClCompile Include="..\..\source\components\utilities\utcksum.c" />
@@ -315,7 +510,9 @@
     <ClCompile Include="..\..\source\components\utilities\utlock.c" />
     <ClCompile Include="..\..\source\components\utilities\utmath.c">
       <DisableLanguageExtensions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</DisableLanguageExtensions>
+      <DisableLanguageExtensions Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</DisableLanguageExtensions>
       <DisableLanguageExtensions Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</DisableLanguageExtensions>
+      <DisableLanguageExtensions Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</DisableLanguageExtensions>
     </ClCompile>
     <ClCompile Include="..\..\source\components\utilities\utmisc.c" />
     <ClCompile Include="..\..\source\components\utilities\utmutex.c" />
@@ -324,20 +521,26 @@
     <ClCompile Include="..\..\source\components\utilities\utosi.c" />
     <ClCompile Include="..\..\source\components\utilities\utownerid.c" />
     <ClCompile Include="..\..\source\components\utilities\utpredef.c" />
+    <ClCompile Include="..\..\source\components\utilities\utresdecode.c" />
     <ClCompile Include="..\..\source\components\utilities\utresrc.c" />
     <ClCompile Include="..\..\source\components\utilities\utstate.c" />
     <ClCompile Include="..\..\source\components\utilities\utstring.c" />
+    <ClCompile Include="..\..\source\components\utilities\utstrsuppt.c" />
     <ClCompile Include="..\..\source\components\utilities\utstrtoul64.c" />
     <ClCompile Include="..\..\source\components\utilities\uttrack.c" />
+    <ClCompile Include="..\..\source\components\utilities\utuuid.c" />
     <ClCompile Include="..\..\source\components\utilities\utxface.c" />
     <ClCompile Include="..\..\source\components\utilities\utxferror.c" />
     <ClCompile Include="..\..\source\components\utilities\utxfinit.c" />
     <ClCompile Include="..\..\source\components\utilities\utxfmutex.c" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\source\include\acapps.h" />
     <ClInclude Include="..\..\source\include\acbuffer.h" />
+    <ClInclude Include="..\..\source\include\acclib.h" />
     <ClInclude Include="..\..\source\include\accommon.h" />
     <ClInclude Include="..\..\source\Include\acconfig.h" />
+    <ClInclude Include="..\..\source\include\acconvert.h" />
     <ClInclude Include="..\..\source\Include\acdebug.h" />
     <ClInclude Include="..\..\source\INCLUDE\acdisasm.h" />
     <ClInclude Include="..\..\source\Include\acdispat.h" />
@@ -362,12 +565,14 @@
     <ClInclude Include="..\..\source\include\acrestyp.h" />
     <ClInclude Include="..\..\source\include\acstruct.h" />
     <ClInclude Include="..\..\source\Include\actables.h" />
+    <ClInclude Include="..\..\source\include\actbinfo.h" />
     <ClInclude Include="..\..\source\Include\actbl.h" />
     <ClInclude Include="..\..\source\Include\actbl1.h" />
     <ClInclude Include="..\..\source\Include\actbl2.h" />
     <ClInclude Include="..\..\source\include\actbl3.h" />
     <ClInclude Include="..\..\source\Include\actypes.h" />
     <ClInclude Include="..\..\source\Include\acutils.h" />
+    <ClInclude Include="..\..\source\include\acuuid.h" />
     <ClInclude Include="..\..\source\Include\amlcode.h" />
     <ClInclude Include="..\..\source\INCLUDE\amlresrc.h" />
     <ClInclude Include="..\..\source\Include\platform\acefi.h" />
@@ -377,6 +582,7 @@
     <ClInclude Include="..\..\source\Include\platform\aclinux.h" />
     <ClInclude Include="..\..\source\Include\platform\acmsvc.h" />
     <ClInclude Include="..\..\source\Include\platform\acwin.h" />
+    <ClInclude Include="..\..\source\include\platform\acwin64.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

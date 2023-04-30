@@ -1,0 +1,18 @@
+^C:\USERS\LOUKD\DESKTOP\NOS\SRC\DRIVERS\ACPI\SOURCE\COMPILER\ASLCOMPILER.L
+flex -i -PAslCompiler -oaslcompiler.l.c C:\Users\loukd\Desktop\NOS\src\drivers\acpi\source\compiler\aslcompiler.l
+^C:\USERS\LOUKD\DESKTOP\NOS\SRC\DRIVERS\ACPI\SOURCE\COMPILER\ASLPARSER.Y
+m4 -P -IC:\Users\loukd\Desktop\NOS\src\drivers\acpi\source\compiler\ C:\Users\loukd\Desktop\NOS\src\drivers\acpi\source\compiler\aslparser.y > aslcompiler.y
+^C:\USERS\LOUKD\DESKTOP\NOS\SRC\DRIVERS\ACPI\SOURCE\COMPILER\DTPARSER.L
+flex -PDtParser -odtparser.l.c C:\Users\loukd\Desktop\NOS\src\drivers\acpi\source\compiler\dtparser.l
+^C:\USERS\LOUKD\DESKTOP\NOS\SRC\DRIVERS\ACPI\SOURCE\COMPILER\DTPARSER.Y
+bison -d -l -pDtParser -v C:\Users\loukd\Desktop\NOS\src\drivers\acpi\source\compiler\dtparser.y -vd -odtparser.y.c
+^C:\USERS\LOUKD\DESKTOP\NOS\SRC\DRIVERS\ACPI\SOURCE\COMPILER\PRPARSER.L
+flex -PPrParser -oprparser.l.c C:\Users\loukd\Desktop\NOS\src\drivers\acpi\source\compiler\prparser.l
+^C:\USERS\LOUKD\DESKTOP\NOS\SRC\DRIVERS\ACPI\SOURCE\COMPILER\PRPARSER.Y
+bison -d -l -pPrParser -v C:\Users\loukd\Desktop\NOS\src\drivers\acpi\source\compiler\prparser.y -vd -oprparser.y.c
+^C:\USERS\LOUKD\DESKTOP\NOS\SRC\DRIVERS\ACPI\SOURCE\COMPILER\DTCOMPILERPARSER.L
+flex -i -PDtCompilerParser -odtcompilerparser.l.c C:\Users\loukd\Desktop\NOS\src\drivers\acpi\source\compiler\dtcompilerparser.l
+^C:\USERS\LOUKD\DESKTOP\NOS\SRC\DRIVERS\ACPI\SOURCE\COMPILER\DTCOMPILERPARSER.Y
+bison -d -l -pDtCompilerParser -v C:\Users\loukd\Desktop\NOS\src\drivers\acpi\source\compiler\dtcompilerparser.y -vd -odtcompilerparser.y.c
+^C:\USERS\LOUKD\DESKTOP\NOS\SRC\DRIVERS\ACPI\GENERATE\MSVC2017\ASLCOMPILER.Y
+bison -d -l -pAslCompiler -v C:\Users\loukd\Desktop\NOS\src\drivers\acpi\generate\msvc2017\aslcompiler.y -vd -oaslcompiler.y.c

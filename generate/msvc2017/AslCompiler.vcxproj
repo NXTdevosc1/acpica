@@ -5,35 +5,64 @@
       <Configuration>Debug</Configuration>
       <Platform>Win32</Platform>
     </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
     <ProjectConfiguration Include="Release|Win32">
       <Configuration>Release</Configuration>
       <Platform>Win32</Platform>
     </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
     <ProjectConfiguration Include="Template|Win32">
       <Configuration>Template</Configuration>
       <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Template|x64">
+      <Configuration>Template</Configuration>
+      <Platform>x64</Platform>
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <SccProjectName />
     <SccLocalPath />
     <ProjectGuid>{66BE33E1-849A-42AB-AE4B-2ABBC13CB432}</ProjectGuid>
-    <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Template|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
-    <PlatformToolset>v141</PlatformToolset>
+    <PlatformToolset>v143</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Template|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
-    <PlatformToolset>v141</PlatformToolset>
+    <PlatformToolset>v143</PlatformToolset>
+    <UseOfMfc>false</UseOfMfc>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
     <UseOfMfc>false</UseOfMfc>
     <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
-    <PlatformToolset>v141</PlatformToolset>
+    <PlatformToolset>v143</PlatformToolset>
+    <UseOfMfc>false</UseOfMfc>
+    <CharacterSet>MultiByte</CharacterSet>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
     <UseOfMfc>false</UseOfMfc>
     <CharacterSet>MultiByte</CharacterSet>
     <WholeProgramOptimization>true</WholeProgramOptimization>
@@ -44,11 +73,22 @@
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Template|Win32'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Template|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
   <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="PropertySheets">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
     <Import Project="$(VCTargetsPath)Microsoft.Cpp.UpgradeFromVC60.props" />
   </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="$(VCTargetsPath)Microsoft.Cpp.UpgradeFromVC60.props" />
+  </ImportGroup>
   <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="$(VCTargetsPath)Microsoft.Cpp.UpgradeFromVC60.props" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="PropertySheets">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
     <Import Project="$(VCTargetsPath)Microsoft.Cpp.UpgradeFromVC60.props" />
   </ImportGroup>
@@ -58,9 +98,15 @@
     <IntDir>.\AslCompiler\</IntDir>
     <LinkIncremental>false</LinkIncremental>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <OutDir>.\AslCompilerDebug\</OutDir>
     <IntDir>.\AslCompilerDebug\</IntDir>
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>false</LinkIncremental>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -123,6 +169,65 @@
       <GenerateDebugInformation>false</GenerateDebugInformation>
     </Link>
   </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <InlineFunctionExpansion>OnlyExplicitInline</InlineFunctionExpansion>
+      <FunctionLevelLinking>false</FunctionLevelLinking>
+      <Optimization>MaxSpeed</Optimization>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <WarningLevel>Level4</WarningLevel>
+      <StringPooling>true</StringPooling>
+      <IgnoreStandardIncludePath>false</IgnoreStandardIncludePath>
+      <AdditionalIncludeDirectories>..\..\source\include;..\..\source\compiler;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>NDEBUG;WIN32;_CONSOLE;__STDC__;YY_NEVER_INTERACTIVE;YY_NO_UNISTD_H;ACPI_ASL_COMPILER;ACPI_DISASSEMBLER;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AssemblerListingLocation>.\AslCompiler\</AssemblerListingLocation>
+      <PrecompiledHeaderOutputFile>.\AslCompiler\AslCompiler.pch</PrecompiledHeaderOutputFile>
+      <ObjectFileName>.\AslCompiler\</ObjectFileName>
+      <ProgramDataBaseFileName>.\AslCompiler\</ProgramDataBaseFileName>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <ExceptionHandling>false</ExceptionHandling>
+      <FloatingPointExceptions>false</FloatingPointExceptions>
+      <DisableLanguageExtensions>false</DisableLanguageExtensions>
+      <CallingConvention>FastCall</CallingConvention>
+      <CompileAs>CompileAsC</CompileAs>
+      <ConformanceMode>true</ConformanceMode>
+      <BrowseInformation>true</BrowseInformation>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <ControlFlowGuard>Guard</ControlFlowGuard>
+    </ClCompile>
+    <PreLinkEvent>
+      <Command>if NOT EXIST ..\..\libraries mkdir ..\..\libraries</Command>
+      <Message>Checking existence of acpica/libraries directory</Message>
+    </PreLinkEvent>
+    <PostBuildEvent>
+      <Command>copy aslcompiler\aslcompiler.exe ..\..\libraries\iasl.exe</Command>
+      <Message>Copying iasl to libraries...</Message>
+    </PostBuildEvent>
+    <Midl>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <TypeLibraryName>.\AslCompiler\AslCompiler.tlb</TypeLibraryName>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+    </Midl>
+    <ResourceCompile>
+      <Culture>0x0409</Culture>
+      <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ResourceCompile>
+    <Bscmake>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <OutputFile>.\AslCompiler\AslCompiler.bsc</OutputFile>
+      <AdditionalOptions> /o"/acpica/generate/msvc2017/AslCompiler/AslCompiler.bsc" </AdditionalOptions>
+    </Bscmake>
+    <Link>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <SubSystem>Console</SubSystem>
+      <OutputFile>.\AslCompiler\AslCompiler.exe</OutputFile>
+      <AdditionalDependencies>setargv.obj;%(AdditionalDependencies)</AdditionalDependencies>
+      <ProgramDatabaseFile>$(OutDir)$(TargetName).pdb</ProgramDatabaseFile>
+      <GenerateDebugInformation>false</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
@@ -159,6 +264,61 @@
       <TypeLibraryName>.\AslCompilerDebug\AslCompiler.tlb</TypeLibraryName>
       <MkTypLibCompatible>true</MkTypLibCompatible>
       <TargetEnvironment>Win32</TargetEnvironment>
+    </Midl>
+    <ResourceCompile>
+      <Culture>0x0409</Culture>
+      <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ResourceCompile>
+    <Bscmake>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <OutputFile>.\AslCompilerDebug\AslCompiler.bsc</OutputFile>
+      <AdditionalOptions> /o"/acpica/generate/msvc2017/AslCompilerDebug/AslCompiler.bsc" </AdditionalOptions>
+    </Bscmake>
+    <Link>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubSystem>Console</SubSystem>
+      <IgnoreSpecificDefaultLibraries>libcmt.lib;%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
+      <OutputFile>.\AslCompilerDebug\AslCompiler.exe</OutputFile>
+      <AdditionalDependencies>setargv.obj;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalOptions> /pdb:"/acpica/generate/msvc2017/AslCompilerDebug/AslCompiler.pdb"</AdditionalOptions>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+      <InlineFunctionExpansion>OnlyExplicitInline</InlineFunctionExpansion>
+      <FunctionLevelLinking>false</FunctionLevelLinking>
+      <Optimization>Disabled</Optimization>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <WarningLevel>Level4</WarningLevel>
+      <MinimalRebuild>false</MinimalRebuild>
+      <OmitFramePointers>false</OmitFramePointers>
+      <StringPooling>true</StringPooling>
+      <AdditionalIncludeDirectories>..\..\source\include;..\..\source\compiler;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>_DEBUG;WIN32;_CONSOLE;__STDC__;YY_NEVER_INTERACTIVE;YY_NO_UNISTD_H;ACPI_ASL_COMPILER;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AssemblerListingLocation>.\AslCompilerDebug\</AssemblerListingLocation>
+      <PrecompiledHeaderOutputFile>.\AslCompilerDebug\AslCompiler.pch</PrecompiledHeaderOutputFile>
+      <ObjectFileName>.\AslCompilerDebug\</ObjectFileName>
+      <ProgramDataBaseFileName>.\AslCompilerDebug\</ProgramDataBaseFileName>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <CallingConvention>FastCall</CallingConvention>
+      <CompileAs>CompileAsC</CompileAs>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+    </ClCompile>
+    <PreLinkEvent>
+      <Command>if NOT EXIST ..\..\libraries mkdir ..\..\libraries</Command>
+      <Message>Checking existence of acpica/libraries directory</Message>
+    </PreLinkEvent>
+    <PostBuildEvent>
+      <Command>copy aslcompilerdebug\aslcompiler.exe ..\..\libraries\iasl_dbg.exe</Command>
+      <Message>Copying iasl to libraries...</Message>
+    </PostBuildEvent>
+    <Midl>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <TypeLibraryName>.\AslCompilerDebug\AslCompiler.tlb</TypeLibraryName>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
     </Midl>
     <ResourceCompile>
       <Culture>0x0409</Culture>
@@ -368,8 +528,11 @@
     <ClCompile Include="..\..\source\components\utilities\utmath.c" />
     <ClCompile Include="..\..\source\components\utilities\utmisc.c">
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">_DEBUG;WIN32;_CONSOLE;YY_NEVER_INTERACTIVE;YY_NO_UNISTD_H;ACPI_ASL_COMPILER;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">_DEBUG;WIN32;_CONSOLE;YY_NEVER_INTERACTIVE;YY_NO_UNISTD_H;ACPI_ASL_COMPILER;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NDEBUG;WIN32;_CONSOLE;YY_NEVER_INTERACTIVE;YY_NO_UNISTD_H;ACPI_ASL_COMPILER;ACPI_DISASSEMBLER;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|x64'">NDEBUG;WIN32;_CONSOLE;YY_NEVER_INTERACTIVE;YY_NO_UNISTD_H;ACPI_ASL_COMPILER;ACPI_DISASSEMBLER;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <UndefinePreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">_STDC__;%(UndefinePreprocessorDefinitions)</UndefinePreprocessorDefinitions>
+      <UndefinePreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|x64'">_STDC__;%(UndefinePreprocessorDefinitions)</UndefinePreprocessorDefinitions>
     </ClCompile>
     <ClCompile Include="..\..\source\components\utilities\utmutex.c" />
     <ClCompile Include="..\..\source\components\utilities\utnonansi.c" />
@@ -388,42 +551,62 @@
     <ClCompile Include="..\..\source\os_specific\service_layers\oswindir.c" />
     <ClCompile Include="..\..\source\os_specific\service_layers\oswintbl.c">
       <DisableLanguageExtensions Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</DisableLanguageExtensions>
+      <DisableLanguageExtensions Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</DisableLanguageExtensions>
       <DisableLanguageExtensions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</DisableLanguageExtensions>
+      <DisableLanguageExtensions Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</DisableLanguageExtensions>
     </ClCompile>
     <ClCompile Include="..\..\source\os_specific\service_layers\oswinxf.c">
       <DisableLanguageExtensions Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</DisableLanguageExtensions>
+      <DisableLanguageExtensions Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</DisableLanguageExtensions>
       <DisableLanguageExtensions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</DisableLanguageExtensions>
+      <DisableLanguageExtensions Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</DisableLanguageExtensions>
     </ClCompile>
     <ClCompile Include="aslcompiler.l.c">
       <WarningLevel Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Level4</WarningLevel>
+      <WarningLevel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Level4</WarningLevel>
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <ClCompile Include="aslcompiler.y.c">
       <WarningLevel Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Level3</WarningLevel>
+      <WarningLevel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Level3</WarningLevel>
       <WarningLevel Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Level3</WarningLevel>
+      <WarningLevel Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Level3</WarningLevel>
     </ClCompile>
     <ClCompile Include="dtcompilerparser.l.c" />
     <ClCompile Include="dtcompilerparser.y.c">
       <WarningLevel Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Level3</WarningLevel>
+      <WarningLevel Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Level3</WarningLevel>
       <WarningLevel Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Level3</WarningLevel>
+      <WarningLevel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Level3</WarningLevel>
     </ClCompile>
     <ClCompile Include="dtparser.l.c">
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <WarningLevel Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Level4</WarningLevel>
+      <WarningLevel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Level4</WarningLevel>
       <ConformanceMode Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ConformanceMode>
+      <ConformanceMode Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ConformanceMode>
     </ClCompile>
     <ClCompile Include="dtparser.y.c">
       <WarningLevel Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Level3</WarningLevel>
+      <WarningLevel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Level3</WarningLevel>
       <WarningLevel Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Level3</WarningLevel>
+      <WarningLevel Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Level3</WarningLevel>
     </ClCompile>
     <ClCompile Include="prparser.l.c">
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <WarningLevel Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Level4</WarningLevel>
+      <WarningLevel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Level4</WarningLevel>
       <ConformanceMode Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ConformanceMode>
+      <ConformanceMode Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ConformanceMode>
     </ClCompile>
     <ClCompile Include="prparser.y.c">
       <WarningLevel Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Level3</WarningLevel>
+      <WarningLevel Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Level3</WarningLevel>
       <WarningLevel Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Level3</WarningLevel>
+      <WarningLevel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Level3</WarningLevel>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -438,60 +621,104 @@
   <ItemGroup>
     <CustomBuild Include="..\..\source\compiler\aslcompiler.l">
       <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">flex -i -PAslCompiler -o%(Filename).l.c %(FullPath)</Command>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">flex -i -PAslCompiler -o%(Filename).l.c %(FullPath)</Command>
       <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Lexing %(FullPath)</Message>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Lexing %(FullPath)</Message>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">%(Filename).l.c</Outputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">%(Filename).l.c</Outputs>
       <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">flex -i -PAslCompiler -o%(Filename).l.c %(FullPath)</Command>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">flex -i -PAslCompiler -o%(Filename).l.c %(FullPath)</Command>
       <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Lexing %(FullPath)</Message>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Lexing %(FullPath)</Message>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">%(Filename).l.c</Outputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">%(Filename).l.c</Outputs>
       <TreatOutputAsContent Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</TreatOutputAsContent>
+      <TreatOutputAsContent Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</TreatOutputAsContent>
       <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</LinkObjects>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</LinkObjects>
       <FileType>Document</FileType>
       <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+      </AdditionalInputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
       </AdditionalInputs>
     </CustomBuild>
     <CustomBuild Include="..\..\source\compiler\aslparser.y">
       <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">m4 -P -I%(RootDir)%(Directory) %(FullPath) &gt; aslcompiler.y</Command>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">m4 -P -I%(RootDir)%(Directory) %(FullPath) &gt; aslcompiler.y</Command>
       <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Macro-processing %(FullPath)</Message>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Macro-processing %(FullPath)</Message>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">aslcompiler.y</Outputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">aslcompiler.y</Outputs>
       <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">m4 -P -I%(RootDir)%(Directory) %(FullPath) &gt; aslcompiler.y</Command>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">m4 -P -I%(RootDir)%(Directory) %(FullPath) &gt; aslcompiler.y</Command>
       <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Macro-processing %(FullPath)</Message>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Macro-processing %(FullPath)</Message>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">aslcompiler.y</Outputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">aslcompiler.y</Outputs>
       <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">%(RelativeDir)asltokens.y;%(RelativeDir)asltypes.y;%(RelativeDir)aslrules.y;%(RelativeDir)aslprimaries.y;%(RelativeDir)aslcstyle.y;%(RelativeDir)aslkeywords.y;%(RelativeDir)aslresources.y;%(RelativeDir)aslhelpers.y;%(RelativeDir)aslsupport.y</AdditionalInputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">%(RelativeDir)asltokens.y;%(RelativeDir)asltypes.y;%(RelativeDir)aslrules.y;%(RelativeDir)aslprimaries.y;%(RelativeDir)aslcstyle.y;%(RelativeDir)aslkeywords.y;%(RelativeDir)aslresources.y;%(RelativeDir)aslhelpers.y;%(RelativeDir)aslsupport.y</AdditionalInputs>
       <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">%(RelativeDir)asltokens.y;%(RelativeDir)asltypes.y;%(RelativeDir)aslrules.y;%(RelativeDir)aslprimaries.y;%(RelativeDir)aslcstyle.y;%(RelativeDir)aslkeywords.y;%(RelativeDir)aslresources.y;%(RelativeDir)aslhelpers.y;%(RelativeDir)aslsupport.y</AdditionalInputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">%(RelativeDir)asltokens.y;%(RelativeDir)asltypes.y;%(RelativeDir)aslrules.y;%(RelativeDir)aslprimaries.y;%(RelativeDir)aslcstyle.y;%(RelativeDir)aslkeywords.y;%(RelativeDir)aslresources.y;%(RelativeDir)aslhelpers.y;%(RelativeDir)aslsupport.y</AdditionalInputs>
     </CustomBuild>
     <CustomBuild Include="..\..\source\compiler\dtparser.l">
       <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">flex -PDtParser -o%(Filename).l.c %(FullPath)</Command>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">flex -PDtParser -o%(Filename).l.c %(FullPath)</Command>
       <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Lexing %(FullPath)</Message>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Lexing %(FullPath)</Message>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">%(Filename).l.c</Outputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">%(Filename).l.c</Outputs>
       <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">flex -PDtParser -o%(Filename).l.c %(FullPath)</Command>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">flex -PDtParser -o%(Filename).l.c %(FullPath)</Command>
       <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Lexing %(FullPath)</Message>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Lexing %(FullPath)</Message>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">%(Filename).l.c</Outputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">%(Filename).l.c</Outputs>
       <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+      </AdditionalInputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
       </AdditionalInputs>
     </CustomBuild>
     <CustomBuild Include="..\..\source\compiler\dtparser.y">
       <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">bison -d -l -pDtParser -v %(FullPath) -vd -o%(Filename).y.c</Command>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">bison -d -l -pDtParser -v %(FullPath) -vd -o%(Filename).y.c</Command>
       <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Yaccing %(FullPath)</Message>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Yaccing %(FullPath)</Message>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">%(Filename).y.c;%(Filename).y.h</Outputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">%(Filename).y.c;%(Filename).y.h</Outputs>
       <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">bison -d -l -pDtParser -v %(FullPath) -vd -o%(Filename).y.c</Command>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">bison -d -l -pDtParser -v %(FullPath) -vd -o%(Filename).y.c</Command>
       <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Yaccing %(FullPath)</Message>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Yaccing %(FullPath)</Message>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">%(Filename).y.c;%(Filename).y.h</Outputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">%(Filename).y.c;%(Filename).y.h</Outputs>
     </CustomBuild>
     <CustomBuild Include="..\..\source\compiler\prparser.l">
       <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">flex -PPrParser -o%(Filename).l.c %(FullPath)</Command>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">flex -PPrParser -o%(Filename).l.c %(FullPath)</Command>
       <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Lexing %(FullPath)</Message>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Lexing %(FullPath)</Message>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">%(Filename).l.c</Outputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">%(Filename).l.c</Outputs>
       <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">flex -PPrParser -o%(Filename).l.c %(FullPath)</Command>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">flex -PPrParser -o%(Filename).l.c %(FullPath)</Command>
       <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Lexing %(FullPath)</Message>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Lexing %(FullPath)</Message>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">%(Filename).l.c</Outputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">%(Filename).l.c</Outputs>
     </CustomBuild>
     <CustomBuild Include="..\..\source\compiler\prparser.y">
       <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">bison -d -l -pPrParser -v %(FullPath) -vd -o%(Filename).y.c</Command>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">bison -d -l -pPrParser -v %(FullPath) -vd -o%(Filename).y.c</Command>
       <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Yaccing %(FullPath)</Message>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Yaccing %(FullPath)</Message>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">%(Filename).y.c;%(Filename).y.h</Outputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">%(Filename).y.c;%(Filename).y.h</Outputs>
       <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">bison -d -l -pPrParser -v %(FullPath) -vd -o%(Filename).y.c</Command>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">bison -d -l -pPrParser -v %(FullPath) -vd -o%(Filename).y.c</Command>
       <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Yaccing %(FullPath)</Message>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Yaccing %(FullPath)</Message>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">%(Filename).y.c;%(Filename).y.h</Outputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">%(Filename).y.c;%(Filename).y.h</Outputs>
     </CustomBuild>
   </ItemGroup>
   <ItemGroup>
@@ -501,20 +728,32 @@
     <CustomBuild Include="..\..\source\compiler\dtcompilerparser.l">
       <FileType>Document</FileType>
       <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">flex -i -PDtCompilerParser -o%(Filename).l.c %(FullPath)</Command>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">flex -i -PDtCompilerParser -o%(Filename).l.c %(FullPath)</Command>
       <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Lexing %(FullPath)</Message>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Lexing %(FullPath)</Message>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">%(Filename).l.c</Outputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">%(Filename).l.c</Outputs>
       <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">flex -i -PDtCompilerParser -o%(Filename).l.c %(FullPath)</Command>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">flex -i -PDtCompilerParser -o%(Filename).l.c %(FullPath)</Command>
       <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Lexing %(FullPath)</Message>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Lexing %(FullPath)</Message>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">%(Filename).l.c</Outputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">%(Filename).l.c</Outputs>
     </CustomBuild>
     <CustomBuild Include="..\..\source\compiler\dtcompilerparser.y">
       <FileType>Document</FileType>
       <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">bison -d -l -pDtCompilerParser -v %(FullPath) -vd -o%(Filename).y.c</Command>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">bison -d -l -pDtCompilerParser -v %(FullPath) -vd -o%(Filename).y.c</Command>
       <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Yaccing %(FullPath)</Message>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Yaccing %(FullPath)</Message>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">%(Filename).y.c;%(Filename).y.h</Outputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">%(Filename).y.c;%(Filename).y.h</Outputs>
       <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">bison -d -l -pDtCompilerParser -v %(FullPath) -vd -o%(Filename).y.c</Command>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">bison -d -l -pDtCompilerParser -v %(FullPath) -vd -o%(Filename).y.c</Command>
       <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Yaccing %(FullPath)</Message>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Yaccing %(FullPath)</Message>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">%(Filename).y.c;%(Filename).y.h</Outputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">%(Filename).y.c;%(Filename).y.h</Outputs>
     </CustomBuild>
   </ItemGroup>
   <ItemGroup>
@@ -530,11 +769,17 @@
     <CustomBuild Include="aslcompiler.y">
       <FileType>Document</FileType>
       <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">bison -d -l -pAslCompiler -v %(FullPath) -vd -o%(Filename).y.c</Command>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">bison -d -l -pAslCompiler -v %(FullPath) -vd -o%(Filename).y.c</Command>
       <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Yaccing %(FullPath)</Message>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Yaccing %(FullPath)</Message>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">%(Filename).y.c;%(Filename).y.h</Outputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">%(Filename).y.c;%(Filename).y.h</Outputs>
       <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">bison -d -l -pAslCompiler -v %(FullPath) -vd -o%(Filename).y.c</Command>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">bison -d -l -pAslCompiler -v %(FullPath) -vd -o%(Filename).y.c</Command>
       <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Yaccing %(FullPath)</Message>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Yaccing %(FullPath)</Message>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">%(Filename).y.c;%(Filename).y.h;%(Outputs)</Outputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">%(Filename).y.c;%(Filename).y.h;%(Outputs)</Outputs>
     </CustomBuild>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

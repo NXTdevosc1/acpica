@@ -1,0 +1,29 @@
+﻿C:\Program Files\Microsoft Visual Studio\2022\Professional\MSBuild\Microsoft\VC\v170\Microsoft.CppBuild.targets(517,5): warning MSB8028: The intermediate directory (x64\Release\) contains files shared from another project (AcpiBin.vcxproj, AcpiDump.vcxproj, AcpiExec.vcxproj, AcpiHelp.vcxproj, AcpiSrc.vcxproj, AcpiSubsystem.vcxproj, AcpiXtract.vcxproj).  This can lead to incorrect clean and rebuild behavior.
+  Lexing C:\Users\loukd\Desktop\NOS\src\drivers\acpi\source\compiler\aslcompiler.l
+  'flex' is not recognized as an internal or external command,
+  operable program or batch file.
+  Macro-processing C:\Users\loukd\Desktop\NOS\src\drivers\acpi\source\compiler\aslparser.y
+  'm4' is not recognized as an internal or external command,
+  operable program or batch file.
+  Lexing C:\Users\loukd\Desktop\NOS\src\drivers\acpi\source\compiler\dtparser.l
+  'flex' is not recognized as an internal or external command,
+  operable program or batch file.
+  Yaccing C:\Users\loukd\Desktop\NOS\src\drivers\acpi\source\compiler\dtparser.y
+  'bison' is not recognized as an internal or external command,
+  operable program or batch file.
+  Lexing C:\Users\loukd\Desktop\NOS\src\drivers\acpi\source\compiler\prparser.l
+  'flex' is not recognized as an internal or external command,
+  operable program or batch file.
+  Yaccing C:\Users\loukd\Desktop\NOS\src\drivers\acpi\source\compiler\prparser.y
+  'bison' is not recognized as an internal or external command,
+  operable program or batch file.
+  Lexing C:\Users\loukd\Desktop\NOS\src\drivers\acpi\source\compiler\dtcompilerparser.l
+  'flex' is not recognized as an internal or external command,
+  operable program or batch file.
+  Yaccing C:\Users\loukd\Desktop\NOS\src\drivers\acpi\source\compiler\dtcompilerparser.y
+  'bison' is not recognized as an internal or external command,
+  operable program or batch file.
+  Yaccing C:\Users\loukd\Desktop\NOS\src\drivers\acpi\generate\msvc2017\aslcompiler.y
+  'bison' is not recognized as an internal or external command,
+  operable program or batch file.
+C:\Program Files\Microsoft Visual Studio\2022\Professional\MSBuild\Microsoft\VC\v170\Microsoft.CppCommon.targets(247,5): error MSB8066: Custom build for '..\..\source\compiler\aslcompiler.l;..\..\source\compiler\aslparser.y;..\..\source\compiler\dtparser.l;..\..\source\compiler\dtparser.y;..\..\source\compiler\prparser.l;..\..\source\compiler\prparser.y;..\..\source\compiler\dtcompilerparser.l;..\..\source\compiler\dtcompilerparser.y;aslcompiler.y' exited with code 9009.

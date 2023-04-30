@@ -294,6 +294,7 @@
  *
  *****************************************************************************/
 
+
 #if defined(__GNUC__) && !defined(__INTEL_COMPILER)
 #include "acgcc.h"
 
@@ -304,7 +305,6 @@
 #include "acintel.h"
 
 #endif
-#define _EDK2_EFI
 
 #if defined(_LINUX) || defined(__linux__)
 #include "aclinux.h"

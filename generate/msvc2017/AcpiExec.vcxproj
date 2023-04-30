@@ -5,35 +5,64 @@
       <Configuration>Debug</Configuration>
       <Platform>Win32</Platform>
     </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
     <ProjectConfiguration Include="Release|Win32">
       <Configuration>Release</Configuration>
       <Platform>Win32</Platform>
     </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
     <ProjectConfiguration Include="Template|Win32">
       <Configuration>Template</Configuration>
       <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Template|x64">
+      <Configuration>Template</Configuration>
+      <Platform>x64</Platform>
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <SccProjectName />
     <SccLocalPath />
     <ProjectGuid>{1C19430A-8836-4023-AC37-AAB1921220E6}</ProjectGuid>
-    <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Template|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
-    <PlatformToolset>v141</PlatformToolset>
+    <PlatformToolset>v143</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Template|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
-    <PlatformToolset>v141</PlatformToolset>
+    <PlatformToolset>v143</PlatformToolset>
+    <UseOfMfc>false</UseOfMfc>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
     <UseOfMfc>false</UseOfMfc>
     <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
-    <PlatformToolset>v141</PlatformToolset>
+    <PlatformToolset>v143</PlatformToolset>
+    <UseOfMfc>false</UseOfMfc>
+    <CharacterSet>MultiByte</CharacterSet>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
     <UseOfMfc>false</UseOfMfc>
     <CharacterSet>MultiByte</CharacterSet>
     <WholeProgramOptimization>true</WholeProgramOptimization>
@@ -44,11 +73,22 @@
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Template|Win32'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Template|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
   <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="PropertySheets">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
     <Import Project="$(VCTargetsPath)Microsoft.Cpp.UpgradeFromVC60.props" />
   </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="$(VCTargetsPath)Microsoft.Cpp.UpgradeFromVC60.props" />
+  </ImportGroup>
   <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="$(VCTargetsPath)Microsoft.Cpp.UpgradeFromVC60.props" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="PropertySheets">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
     <Import Project="$(VCTargetsPath)Microsoft.Cpp.UpgradeFromVC60.props" />
   </ImportGroup>
@@ -58,9 +98,15 @@
     <IntDir>.\AcpiExec\</IntDir>
     <LinkIncremental>false</LinkIncremental>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <OutDir>.\AcpiExecDebug\</OutDir>
     <IntDir>.\AcpiExecDebug\</IntDir>
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>false</LinkIncremental>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -117,7 +163,114 @@
       <GenerateDebugInformation>false</GenerateDebugInformation>
     </Link>
   </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <InlineFunctionExpansion>OnlyExplicitInline</InlineFunctionExpansion>
+      <FunctionLevelLinking>false</FunctionLevelLinking>
+      <Optimization>MaxSpeed</Optimization>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <WarningLevel>Level4</WarningLevel>
+      <StringPooling>true</StringPooling>
+      <AdditionalIncludeDirectories>..\..\source\include;..\..\source\tools\acpiexec;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>NDEBUG;WIN64;__STDC__;_CONSOLE;ACPI_EXEC_APP;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AssemblerListingLocation>.\AcpiExec\</AssemblerListingLocation>
+      <PrecompiledHeaderOutputFile>.\AcpiExec\AcpiExec.pch</PrecompiledHeaderOutputFile>
+      <ObjectFileName>.\AcpiExec\</ObjectFileName>
+      <ProgramDataBaseFileName>.\AcpiExec\</ProgramDataBaseFileName>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <BufferSecurityCheck>false</BufferSecurityCheck>
+      <FloatingPointExceptions>false</FloatingPointExceptions>
+      <DisableLanguageExtensions>false</DisableLanguageExtensions>
+      <DisableSpecificWarnings>
+      </DisableSpecificWarnings>
+      <ConformanceMode>true</ConformanceMode>
+      <CallingConvention>FastCall</CallingConvention>
+      <CompileAs>CompileAsC</CompileAs>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <ControlFlowGuard>Guard</ControlFlowGuard>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+    </ClCompile>
+    <PreLinkEvent>
+      <Command>if NOT EXIST ..\..\libraries mkdir ..\..\libraries</Command>
+      <Message>Checking existence of acpica/libraries directory</Message>
+    </PreLinkEvent>
+    <PostBuildEvent>
+      <Command>copy acpiexec\acpiexec.exe ..\..\libraries\acpiexec.exe</Command>
+      <Message>Copying acpiexec to libraries...</Message>
+    </PostBuildEvent>
+    <Midl>
+      <TypeLibraryName>.\AcpiExec\AcpiExec.tlb</TypeLibraryName>
+    </Midl>
+    <ResourceCompile>
+      <Culture>0x0409</Culture>
+      <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ResourceCompile>
+    <Bscmake>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <OutputFile>.\AcpiExec\AcpiExec.bsc</OutputFile>
+    </Bscmake>
+    <Link>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <SubSystem>Console</SubSystem>
+      <OutputFile>.\AcpiExec\AcpiExec.exe</OutputFile>
+      <AdditionalDependencies>setargv.obj;%(AdditionalDependencies)</AdditionalDependencies>
+      <GenerateDebugInformation>false</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+      <InlineFunctionExpansion>OnlyExplicitInline</InlineFunctionExpansion>
+      <FunctionLevelLinking>false</FunctionLevelLinking>
+      <Optimization>Disabled</Optimization>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <WarningLevel>Level4</WarningLevel>
+      <MinimalRebuild>false</MinimalRebuild>
+      <OmitFramePointers>false</OmitFramePointers>
+      <StringPooling>true</StringPooling>
+      <AdditionalIncludeDirectories>..\..\source\tools\acpiexec;..\..\source\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>_DEBUG;WIN32;__STDC__;_CONSOLE;ACPI_EXEC_APP;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AssemblerListingLocation>.\AcpiExecDebug\</AssemblerListingLocation>
+      <PrecompiledHeaderOutputFile>.\AcpiExecDebug\AcpiExec.pch</PrecompiledHeaderOutputFile>
+      <ObjectFileName>.\AcpiExecDebug\</ObjectFileName>
+      <ProgramDataBaseFileName>.\AcpiExecDebug\</ProgramDataBaseFileName>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <ConformanceMode>true</ConformanceMode>
+      <CallingConvention>FastCall</CallingConvention>
+      <CompileAs>CompileAsC</CompileAs>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+    </ClCompile>
+    <PreLinkEvent>
+      <Command>if NOT EXIST ..\..\libraries mkdir ..\..\libraries</Command>
+      <Message>Checking existence of acpica/libraries directory</Message>
+    </PreLinkEvent>
+    <PostBuildEvent>
+      <Command>copy acpiexecdebug\acpiexec.exe ..\..\libraries\acpiexec_dbg.exe</Command>
+      <Message>Copying acpiexec to libraries...</Message>
+    </PostBuildEvent>
+    <Midl>
+      <TypeLibraryName>.\AcpiExecDebug\AcpiExec.tlb</TypeLibraryName>
+    </Midl>
+    <ResourceCompile>
+      <Culture>0x0409</Culture>
+      <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ResourceCompile>
+    <Bscmake>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <OutputFile>.\AcpiExecDebug\AcpiExec.bsc</OutputFile>
+      <AdditionalOptions> /o"/acpica/generate/msvc2017/AcpiExecDebug/AcpiExec.bsc" </AdditionalOptions>
+    </Bscmake>
+    <Link>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubSystem>Console</SubSystem>
+      <IgnoreSpecificDefaultLibraries>libcmt.lib;%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
+      <OutputFile>.\AcpiExecDebug\AcpiExec.exe</OutputFile>
+      <AdditionalDependencies>libcmtd.lib;setargv.obj;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
       <InlineFunctionExpansion>OnlyExplicitInline</InlineFunctionExpansion>
@@ -218,6 +371,8 @@
     <ClCompile Include="..\..\source\components\dispatcher\dswstate.c" />
     <ClCompile Include="..\..\source\components\events\evevent.c">
       <DisableSpecificWarnings Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+      </DisableSpecificWarnings>
+      <DisableSpecificWarnings Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
       </DisableSpecificWarnings>
     </ClCompile>
     <ClCompile Include="..\..\source\components\events\evglock.c" />
@@ -347,10 +502,13 @@
     <ClCompile Include="..\..\source\components\utilities\utlock.c" />
     <ClCompile Include="..\..\source\components\utilities\utmath.c">
       <DisableLanguageExtensions Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</DisableLanguageExtensions>
+      <DisableLanguageExtensions Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</DisableLanguageExtensions>
       <DisableLanguageExtensions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</DisableLanguageExtensions>
+      <DisableLanguageExtensions Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</DisableLanguageExtensions>
     </ClCompile>
     <ClCompile Include="..\..\source\components\utilities\utmisc.c">
       <DisableLanguageExtensions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</DisableLanguageExtensions>
+      <DisableLanguageExtensions Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</DisableLanguageExtensions>
     </ClCompile>
     <ClCompile Include="..\..\source\components\utilities\utmutex.c" />
     <ClCompile Include="..\..\source\components\utilities\utnonansi.c" />
@@ -374,20 +532,27 @@
     <ClCompile Include="..\..\source\os_specific\service_layers\oswindir.c" />
     <ClCompile Include="..\..\source\os_specific\service_layers\oswinxf.c">
       <DisableLanguageExtensions Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</DisableLanguageExtensions>
+      <DisableLanguageExtensions Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</DisableLanguageExtensions>
       <DisableLanguageExtensions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</DisableLanguageExtensions>
+      <DisableLanguageExtensions Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</DisableLanguageExtensions>
     </ClCompile>
     <ClCompile Include="..\..\source\tools\acpiexec\aeexception.c" />
     <ClCompile Include="..\..\source\Tools\AcpiExec\aeexec.c">
       <DisableLanguageExtensions Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</DisableLanguageExtensions>
+      <DisableLanguageExtensions Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</DisableLanguageExtensions>
       <DisableLanguageExtensions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</DisableLanguageExtensions>
+      <DisableLanguageExtensions Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</DisableLanguageExtensions>
     </ClCompile>
     <ClCompile Include="..\..\source\tools\acpiexec\aehandlers.c" />
     <ClCompile Include="..\..\source\tools\acpiexec\aeinitfile.c" />
     <ClCompile Include="..\..\source\tools\acpiexec\aeinstall.c" />
     <ClCompile Include="..\..\source\Tools\AcpiExec\aemain.c">
       <DisableLanguageExtensions Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</DisableLanguageExtensions>
+      <DisableLanguageExtensions Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</DisableLanguageExtensions>
       <DisableLanguageExtensions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</DisableLanguageExtensions>
+      <DisableLanguageExtensions Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</DisableLanguageExtensions>
       <BrowseInformation Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</BrowseInformation>
+      <BrowseInformation Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</BrowseInformation>
     </ClCompile>
     <ClCompile Include="..\..\source\tools\acpiexec\aeregion.c" />
     <ClCompile Include="..\..\source\tools\acpiexec\aetables.c" />

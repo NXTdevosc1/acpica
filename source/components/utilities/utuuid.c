@@ -156,7 +156,7 @@
         ACPI_MODULE_NAME    ("utuuid")
 
 
-#if (defined ACPI_ASL_COMPILER || defined ACPI_EXEC_APP || defined ACPI_HELP_APP)
+//#if (defined ACPI_ASL_COMPILER || defined ACPI_EXEC_APP || defined ACPI_HELP_APP)
 /*
  * UUID support functions.
  *
@@ -256,4 +256,4 @@ AcpiUtConvertUuidToString (
     OutString[UUID_STRING_LENGTH] = 0; /* Null terminate */
     return (AE_OK);
 }
-#endif
+//#endif

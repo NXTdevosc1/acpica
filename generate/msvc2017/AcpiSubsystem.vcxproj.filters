@@ -595,6 +595,69 @@
     <ClCompile Include="..\..\source\components\utilities\utcksum.c">
       <Filter>Source Files\Utilities</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\source\components\utilities\utascii.c">
+      <Filter>Source Files\Utilities</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\components\utilities\utresdecode.c">
+      <Filter>Source Files\Utilities</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\components\utilities\utstrsuppt.c">
+      <Filter>Source Files\Utilities</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\components\utilities\utuuid.c">
+      <Filter>Source Files\Utilities</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\components\dispatcher\dsdebug.c">
+      <Filter>Source Files\Dispatcher</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\components\dispatcher\dspkginit.c">
+      <Filter>Source Files\Dispatcher</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\components\disassembler\dmcstyle.c">
+      <Filter>Source Files\Disassembler</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\common\acfileio.c">
+      <Filter>Source Files\Common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\common\acgetline.c">
+      <Filter>Source Files\Common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\common\adwalk.c">
+      <Filter>Source Files\Common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\common\ahpredef.c">
+      <Filter>Source Files\Common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\common\ahtable.c">
+      <Filter>Source Files\Common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\common\ahuuids.c">
+      <Filter>Source Files\Common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\common\dmswitch.c">
+      <Filter>Source Files\Common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\common\dmtbinfo.c">
+      <Filter>Source Files\Common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\common\dmtbinfo1.c">
+      <Filter>Source Files\Common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\common\dmtbinfo2.c">
+      <Filter>Source Files\Common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\common\dmtbinfo3.c">
+      <Filter>Source Files\Common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\common\getopt.c">
+      <Filter>Source Files\Common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\components\executer\exconcat.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\components\executer\exserial.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\source\include\acbuffer.h">
@@ -721,6 +784,24 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\..\source\INCLUDE\amlresrc.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\source\include\platform\acwin64.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\source\include\acapps.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\source\include\acclib.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\source\include\acconvert.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\source\include\actbinfo.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\source\include\acuuid.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

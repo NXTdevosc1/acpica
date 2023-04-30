@@ -190,7 +190,7 @@
 #define stat            _stat
 #define fstat           _fstat
 #define mkdir           _mkdir
-#define snprintf        _snprintf
+//#define snprintf        _snprintf
 #if _MSC_VER <= 1200 /* Versions below VC++ 6 */
 #define vsnprintf       _vsnprintf
 #endif

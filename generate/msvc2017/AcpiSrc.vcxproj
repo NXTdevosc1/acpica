@@ -5,13 +5,25 @@
       <Configuration>Debug</Configuration>
       <Platform>Win32</Platform>
     </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
     <ProjectConfiguration Include="Release|Win32">
       <Configuration>Release</Configuration>
       <Platform>Win32</Platform>
     </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
     <ProjectConfiguration Include="Template|Win32">
       <Configuration>Template</Configuration>
       <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Template|x64">
+      <Configuration>Template</Configuration>
+      <Platform>x64</Platform>
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
@@ -22,17 +34,33 @@
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Template|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
-    <PlatformToolset>v141</PlatformToolset>
+    <PlatformToolset>v143</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Template|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
-    <PlatformToolset>v141</PlatformToolset>
+    <PlatformToolset>v143</PlatformToolset>
+    <UseOfMfc>false</UseOfMfc>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
     <UseOfMfc>false</UseOfMfc>
     <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
-    <PlatformToolset>v141</PlatformToolset>
+    <PlatformToolset>v143</PlatformToolset>
+    <UseOfMfc>false</UseOfMfc>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
     <UseOfMfc>false</UseOfMfc>
     <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
@@ -42,11 +70,22 @@
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Template|Win32'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Template|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
   <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="PropertySheets">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
     <Import Project="$(VCTargetsPath)Microsoft.Cpp.UpgradeFromVC60.props" />
   </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="$(VCTargetsPath)Microsoft.Cpp.UpgradeFromVC60.props" />
+  </ImportGroup>
   <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="$(VCTargetsPath)Microsoft.Cpp.UpgradeFromVC60.props" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="PropertySheets">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
     <Import Project="$(VCTargetsPath)Microsoft.Cpp.UpgradeFromVC60.props" />
   </ImportGroup>
@@ -56,9 +95,15 @@
     <IntDir>.\AcpiSrc\</IntDir>
     <LinkIncremental>false</LinkIncremental>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <OutDir>.\AcpiSrcDebug\</OutDir>
     <IntDir>.\AcpiSrcDebug\</IntDir>
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>false</LinkIncremental>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -111,7 +156,107 @@
       <GenerateDebugInformation>false</GenerateDebugInformation>
     </Link>
   </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <InlineFunctionExpansion>OnlyExplicitInline</InlineFunctionExpansion>
+      <FunctionLevelLinking>false</FunctionLevelLinking>
+      <Optimization>MaxSpeed</Optimization>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <WarningLevel>Level4</WarningLevel>
+      <StringPooling>true</StringPooling>
+      <AdditionalIncludeDirectories>..\..\source\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>NDEBUG;WIN32;_CONSOLE;__STDC__;ACPI_SRC_APP;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AssemblerListingLocation>.\AcpiSrc\</AssemblerListingLocation>
+      <PrecompiledHeaderOutputFile>.\AcpiSrc\AcpiSrc.pch</PrecompiledHeaderOutputFile>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <ObjectFileName>.\AcpiSrc\</ObjectFileName>
+      <ProgramDataBaseFileName>.\AcpiSrc\</ProgramDataBaseFileName>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <ConformanceMode>true</ConformanceMode>
+      <CallingConvention>FastCall</CallingConvention>
+      <CompileAs>CompileAsC</CompileAs>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <ControlFlowGuard>Guard</ControlFlowGuard>
+    </ClCompile>
+    <PreLinkEvent>
+      <Command>if NOT EXIST ..\..\libraries mkdir ..\..\libraries</Command>
+      <Message>Checking existence of acpica/libraries directory</Message>
+    </PreLinkEvent>
+    <PostBuildEvent>
+      <Command>copy acpisrc\acpisrc.exe ..\..\libraries\acpisrc.exe</Command>
+      <Message>Copying acpisrc to libraries...</Message>
+    </PostBuildEvent>
+    <Midl>
+      <TypeLibraryName>.\AcpiSrc\AcpiSrc.tlb</TypeLibraryName>
+    </Midl>
+    <ResourceCompile>
+      <Culture>0x0409</Culture>
+      <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ResourceCompile>
+    <Bscmake>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <OutputFile>.\AcpiSrc\AcpiSrc.bsc</OutputFile>
+    </Bscmake>
+    <Link>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <SubSystem>Console</SubSystem>
+      <OutputFile>.\AcpiSrc\AcpiSrc.exe</OutputFile>
+      <AdditionalDependencies>kernel32.lib;advapi32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <GenerateDebugInformation>false</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+      <InlineFunctionExpansion>OnlyExplicitInline</InlineFunctionExpansion>
+      <FunctionLevelLinking>false</FunctionLevelLinking>
+      <Optimization>Disabled</Optimization>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <WarningLevel>Level4</WarningLevel>
+      <MinimalRebuild>false</MinimalRebuild>
+      <StringPooling>true</StringPooling>
+      <AdditionalIncludeDirectories>..\..\source\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>_DEBUG;WIN32;_CONSOLE;__STDC__;ACPI_SRC_APP;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AssemblerListingLocation>.\AcpiSrcDebug\</AssemblerListingLocation>
+      <PrecompiledHeaderOutputFile>.\AcpiSrcDebug\AcpiSrc.pch</PrecompiledHeaderOutputFile>
+      <ObjectFileName>.\AcpiSrcDebug\</ObjectFileName>
+      <ProgramDataBaseFileName>.\AcpiSrcDebug\</ProgramDataBaseFileName>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <CallingConvention>FastCall</CallingConvention>
+      <CompileAs>CompileAsC</CompileAs>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+    </ClCompile>
+    <PreLinkEvent>
+      <Command>if NOT EXIST ..\..\libraries mkdir ..\..\libraries</Command>
+      <Message>Checking existence of acpica/libraries directory</Message>
+    </PreLinkEvent>
+    <PostBuildEvent>
+      <Command>copy acpisrcdebug\acpisrc.exe ..\..\libraries\acpisrc_dbg.exe</Command>
+      <Message>Copying acpisrc to libraries...</Message>
+    </PostBuildEvent>
+    <Midl>
+      <TypeLibraryName>.\AcpiSrcDebug\AcpiSrc.tlb</TypeLibraryName>
+    </Midl>
+    <ResourceCompile>
+      <Culture>0x0409</Culture>
+      <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ResourceCompile>
+    <Bscmake>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <OutputFile>.\AcpiSrcDebug\AcpiSrc.bsc</OutputFile>
+      <AdditionalOptions> /o"/acpica/generate/msvc2017/AcpiSrcDebug/AcpiSrc.bsc" </AdditionalOptions>
+    </Bscmake>
+    <Link>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubSystem>Console</SubSystem>
+      <OutputFile>.\AcpiSrcDebug\AcpiSrc.exe</OutputFile>
+      <AdditionalDependencies>kernel32.lib;advapi32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
       <InlineFunctionExpansion>OnlyExplicitInline</InlineFunctionExpansion>

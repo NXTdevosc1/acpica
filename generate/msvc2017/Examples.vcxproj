@@ -5,13 +5,25 @@
       <Configuration>Debug</Configuration>
       <Platform>Win32</Platform>
     </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
     <ProjectConfiguration Include="Release|Win32">
       <Configuration>Release</Configuration>
       <Platform>Win32</Platform>
     </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
     <ProjectConfiguration Include="Template|Win32">
       <Configuration>Template</Configuration>
       <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Template|x64">
+      <Configuration>Template</Configuration>
+      <Platform>x64</Platform>
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
@@ -22,17 +34,33 @@
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Template|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
-    <PlatformToolset>v141</PlatformToolset>
+    <PlatformToolset>v143</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Template|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
-    <PlatformToolset>v141</PlatformToolset>
+    <PlatformToolset>v143</PlatformToolset>
+    <UseOfMfc>false</UseOfMfc>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
     <UseOfMfc>false</UseOfMfc>
     <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
-    <PlatformToolset>v141</PlatformToolset>
+    <PlatformToolset>v143</PlatformToolset>
+    <UseOfMfc>false</UseOfMfc>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
     <UseOfMfc>false</UseOfMfc>
     <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
@@ -42,11 +70,22 @@
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Template|Win32'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Template|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
   <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="PropertySheets">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
     <Import Project="$(VCTargetsPath)Microsoft.Cpp.UpgradeFromVC60.props" />
   </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="$(VCTargetsPath)Microsoft.Cpp.UpgradeFromVC60.props" />
+  </ImportGroup>
   <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="$(VCTargetsPath)Microsoft.Cpp.UpgradeFromVC60.props" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="PropertySheets">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
     <Import Project="$(VCTargetsPath)Microsoft.Cpp.UpgradeFromVC60.props" />
   </ImportGroup>
@@ -56,9 +95,15 @@
     <IntDir>.\Examples\</IntDir>
     <LinkIncremental>true</LinkIncremental>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <OutDir>.\ExamplesDebug\</OutDir>
     <IntDir>.\ExamplesDebug\</IntDir>
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -107,7 +152,98 @@
       <GenerateDebugInformation>false</GenerateDebugInformation>
     </Link>
   </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <InlineFunctionExpansion>OnlyExplicitInline</InlineFunctionExpansion>
+      <FunctionLevelLinking>false</FunctionLevelLinking>
+      <Optimization>MaxSpeed</Optimization>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <WarningLevel>Level4</WarningLevel>
+      <StringPooling>true</StringPooling>
+      <AdditionalIncludeDirectories>..\..\source\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>NDEBUG;WIN32;_CONSOLE;__STDC__;ACPI_EXAMPLE_APP;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AssemblerListingLocation>.\Examples\</AssemblerListingLocation>
+      <PrecompiledHeaderOutputFile>.\Examples\Examples.pch</PrecompiledHeaderOutputFile>
+      <ObjectFileName>.\Examples\</ObjectFileName>
+      <ProgramDataBaseFileName>.\Examples\</ProgramDataBaseFileName>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <ConformanceMode>true</ConformanceMode>
+      <CallingConvention>FastCall</CallingConvention>
+      <CompileAs>CompileAsC</CompileAs>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <ControlFlowGuard>Guard</ControlFlowGuard>
+    </ClCompile>
+    <PostBuildEvent>
+      <Command>copy examples\examples.exe ..\..\libraries\examples.exe</Command>
+      <Message>Copying examples to libraries...</Message>
+    </PostBuildEvent>
+    <Midl>
+      <TypeLibraryName>.\Examples\Examples.tlb</TypeLibraryName>
+    </Midl>
+    <ResourceCompile>
+      <Culture>0x0409</Culture>
+      <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ResourceCompile>
+    <Bscmake>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <OutputFile>.\Examples\Examples.bsc</OutputFile>
+    </Bscmake>
+    <Link>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <SubSystem>Console</SubSystem>
+      <IgnoreSpecificDefaultLibraries>LIBCMTD;%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
+      <OutputFile>.\Examples\Examples.exe</OutputFile>
+      <AdditionalDependencies>odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <GenerateDebugInformation>false</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+      <InlineFunctionExpansion>OnlyExplicitInline</InlineFunctionExpansion>
+      <FunctionLevelLinking>false</FunctionLevelLinking>
+      <Optimization>Disabled</Optimization>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <WarningLevel>Level4</WarningLevel>
+      <MinimalRebuild>false</MinimalRebuild>
+      <AdditionalIncludeDirectories>..\..\source\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>_DEBUG;WIN32;_CONSOLE;__STDC__;ACPI_EXAMPLE_APP;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AssemblerListingLocation>.\ExamplesDebug\</AssemblerListingLocation>
+      <PrecompiledHeaderOutputFile>.\ExamplesDebug\Examples.pch</PrecompiledHeaderOutputFile>
+      <ObjectFileName>.\ExamplesDebug\</ObjectFileName>
+      <ProgramDataBaseFileName>.\ExamplesDebug\</ProgramDataBaseFileName>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <StringPooling>true</StringPooling>
+      <CallingConvention>FastCall</CallingConvention>
+      <CompileAs>CompileAsC</CompileAs>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+    </ClCompile>
+    <PostBuildEvent>
+      <Command>copy examplesdebug\examples.exe ..\..\\libraries\examples_dbg.exe</Command>
+      <Message>Copying examples to libraries...</Message>
+    </PostBuildEvent>
+    <Midl>
+      <TypeLibraryName>.\ExamplesDebug\Examples.tlb</TypeLibraryName>
+    </Midl>
+    <ResourceCompile>
+      <Culture>0x0409</Culture>
+      <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ResourceCompile>
+    <Bscmake>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <OutputFile>.\ExamplesDebug\Examples.bsc</OutputFile>
+      <AdditionalOptions> /o"/acpica/generate/msvc2017/ExamplesDebug/Examples.bsc" </AdditionalOptions>
+    </Bscmake>
+    <Link>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubSystem>Console</SubSystem>
+      <OutputFile>.\ExamplesDebug\Examples.exe</OutputFile>
+      <AdditionalDependencies>odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
       <InlineFunctionExpansion>OnlyExplicitInline</InlineFunctionExpansion>
@@ -283,7 +419,9 @@
     <ClCompile Include="..\..\source\components\utilities\utxfmutex.c" />
     <ClCompile Include="..\..\source\os_specific\service_layers\oswinxf.c">
       <DisableLanguageExtensions Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</DisableLanguageExtensions>
+      <DisableLanguageExtensions Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</DisableLanguageExtensions>
       <DisableLanguageExtensions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</DisableLanguageExtensions>
+      <DisableLanguageExtensions Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</DisableLanguageExtensions>
     </ClCompile>
     <ClCompile Include="..\..\source\tools\examples\examples.c" />
     <ClCompile Include="..\..\source\tools\examples\exstubs.c" />
