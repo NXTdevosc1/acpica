@@ -5,17 +5,6 @@
 #endif
 #include <acpi.h>
 #include <actypes.h>
-/*
- * Stubs to simplify linkage to the ACPICA core subsystem.
- * Things like Events, Global Lock, etc. are not used
- * by the compiler, so they are stubbed out here.
- */
-ACPI_STATUS
-AcpiNsInitializeObjects (
-    void)
-{
-    return (AE_OK);
-}
 
 
 ACPI_STATUS

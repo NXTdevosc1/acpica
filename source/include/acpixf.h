@@ -152,6 +152,18 @@
 #ifndef __ACXFACE_H__
 #define __ACXFACE_H__
 
+#ifndef WIN64
+#define WIN64
+#endif
+
+#ifndef _MSVC_VER
+#define _MSVC_VER 1201
+#endif
+
+#ifndef ACPI_MACHINE_WIDTH
+#define ACPI_MACHINE_WIDTH 64
+#endif
+
 /* Current ACPICA subsystem version in YYYYMMDD format */
 
 #define ACPI_CA_VERSION                 0x20230331

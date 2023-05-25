@@ -149,8 +149,20 @@
  *
  *****************************************************************************/
 
+
+
 #ifndef __ACPI_H__
 #define __ACPI_H__
+
+/*
+ ___ADDED_PART___
+*/
+
+
+
+/*
+__ENDOF_ADDED_PART__
+*/
 
 /*
  * Public include files for use by code that will interface to ACPICA.
