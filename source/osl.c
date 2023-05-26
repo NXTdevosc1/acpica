@@ -16,6 +16,7 @@
 #include <acpiosxf.h>
 #include <acexcep.h>
 #include <nosefi.h>
+#include <intmgr.h>
 // #include <efi/Uefi.h>
 /*
  * OSL Initialization and shutdown primitives
@@ -288,6 +289,7 @@ AcpiOsInstallInterruptHandler (
 
         NSTATUS s = ExInstallInterruptHandler(
             InterruptNumber,
+            0,
             AcpiInterruptHandler,
             (void*)(NumContexes)
         );

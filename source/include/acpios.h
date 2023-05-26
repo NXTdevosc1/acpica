@@ -18,6 +18,7 @@
 #endif
 #include <acpixf.h>
 #include <intrin.h>
+#include <intmgr.h>
 
 #define FAILED_RETURN(s) if(s != AE_OK) return s;
 
@@ -30,10 +31,17 @@ ACPI_STATUS AcpiInitializePcieConfiguration();
 NSTATUS IoApicAddRouter(ACPI_MADT_IO_APIC* IoApic);
 NSTATUS IoApicSetInterrupt(
     UINT Irq,
-    UINT ProcessorInterruptNumber,
-    UINT64 ProcessorId
+    UINT Flags,
+    UINT InterruptVector,
+    UINT64 ProcessorId,
+    UINT DeliveryMode,
+    BOOLEAN Polarity,
+    BOOLEAN TriggerMode
 );
 NSTATUS IoApicRemoveInterrupt(
-    UINT Irq
+    UINT Irq,
+    UINT Flags
 );
 NSTATUS IoApicTerminateRouter();
+
+BOOLEAN AcpiGetInterruptInformation(UINT Irq, PIM_INTERRUPT_INFORMATION InterruptInformation);

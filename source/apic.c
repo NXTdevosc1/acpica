@@ -4,27 +4,25 @@
 Kernel functions
 */
 
-typedef NSTATUS(__cdecl *IR_SET_INTERRUPT)(
-    UINT Irq,
-    UINT ProcessorInterruptNumber,
-    UINT64 ProcessorId
-);
-
-typedef NSTATUS(__cdecl *IR_REMOVE_INTERRUPT)(UINT Irq);
-
-// Never called
-typedef NSTATUS(__cdecl *IR_TERMINATE_ROUTER)();
 
 NSTATUS KRNLAPI KiSetInterruptRouter(
     UINT Router, // 00 = PIC 01 = IOAPIC
     IR_SET_INTERRUPT SetInterrupt,
     IR_REMOVE_INTERRUPT RemoveInterrupt,
-    IR_TERMINATE_ROUTER TerminateRouter
+    IR_TERMINATE_ROUTER TerminateRouter,
+    IR_GET_INTERRUPT_INFORMATION GetInterruptInformation
 );
 
 BOOLEAN _IoApicEnabled = FALSE;
 
+extern ACPI_MADT_INTERRUPT_OVERRIDE* IntOverrides[];
+extern UINT NumIntOverrides;
 
+NSTATUS TestIrq(INTERRUPT_HANDLER_DATA* Interrupt) {
+    KDebugPrint("IRQ Fired.");
+
+    while(1) __halt();
+}
 
 ACPI_STATUS AcpiInitializeApicConfiguration() {
     ACPI_TABLE_MADT* Madt;
@@ -58,12 +56,14 @@ ACPI_STATUS AcpiInitializeApicConfiguration() {
                         1,
                         IoApicSetInterrupt,
                         IoApicRemoveInterrupt,
-                        IoApicTerminateRouter
+                        IoApicTerminateRouter,
+                        AcpiGetInterruptInformation
                     ) == STATUS_SUCCESS) {
                         _IoApicEnabled = TRUE;
                     }
                 }
                 IoApicAddRouter(ioapic);
+                
                 break;
             }
             case ACPI_MADT_TYPE_INTERRUPT_OVERRIDE: {
@@ -71,6 +71,8 @@ ACPI_STATUS AcpiInitializeApicConfiguration() {
                 KDebugPrint("ACPI_MADT_TYPE_INTERRUPT_OVERRIDE Bus : %x GSI : %x SOURCE : %x",
                 tbl->Bus, tbl->GlobalIrq, tbl->SourceIrq
                 );
+                IntOverrides[NumIntOverrides] = tbl;
+                NumIntOverrides++;
                 break;
             }
             case ACPI_MADT_TYPE_NMI_SOURCE: {
@@ -117,6 +119,14 @@ ACPI_STATUS AcpiInitializeApicConfiguration() {
         }
         ptr += Header->Length;
     }
+
+    NSTATUS s = ExInstallInterruptHandler(
+        0, 0, TestIrq, NULL
+    );
+
+    KDebugPrint("ExInstallInt Status = %x", s);
+
+    
 
     return AE_OK;
 }
