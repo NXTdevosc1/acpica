@@ -46,10 +46,6 @@ void IoApicWrite(
 }
 
 NSTATUS IoApicAddRouter(ACPI_MADT_IO_APIC* IoApic) {
-    if(IoApic->Id != NumRouters) {
-        KDebugPrint("ACPI_BUG_CHECK IoApicID  != NumRouters");
-        while(1) __halt(); // Screen of death
-    }
     Routers[IoApic->Id] = IoApic;
     NumRouters++;
     KeMapVirtualMemory(
@@ -90,7 +86,8 @@ NSTATUS IoApicSetInterrupt(
     }
     // Choose which IOAPIC to use
     ACPI_MADT_IO_APIC* Router = NULL;
-    for(UINT i = 0;i<NumRouters;i++) {
+    for(UINT i = 0;i<0x100;i++) {
+        if(!Routers[i]) continue;
         if(Irq >= Routers[i]->GlobalIrqBase &&
         Irq <= ((IoApicRead(Routers[i], 1) >> 16) & 0xFF)
         ) {
@@ -136,7 +133,8 @@ NSTATUS IoApicRemoveInterrupt(
     }
     // Choose which IOAPIC to use
     ACPI_MADT_IO_APIC* Router = NULL;
-    for(UINT i = 0;i<NumRouters;i++) {
+    for(UINT i = 0;i<0x100;i++) {
+        if(!Routers[i]) continue;
         if(Irq >= Routers[i]->GlobalIrqBase &&
         Irq <= ((IoApicRead(Routers[i], 1) >> 16) & 0xFF)
         ) {

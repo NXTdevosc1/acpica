@@ -4,13 +4,15 @@
 Kernel functions
 */
 
+void* LApicAddress = (void*)(UINT64)0xFEE00000;
 
 NSTATUS KRNLAPI KiSetInterruptRouter(
     UINT Router, // 00 = PIC 01 = IOAPIC
     IR_SET_INTERRUPT SetInterrupt,
     IR_REMOVE_INTERRUPT RemoveInterrupt,
     IR_TERMINATE_ROUTER TerminateRouter,
-    IR_GET_INTERRUPT_INFORMATION GetInterruptInformation
+    IR_GET_INTERRUPT_INFORMATION GetInterruptInformation,
+    IR_END_OF_INTERRUPT Eoi
 );
 
 BOOLEAN _IoApicEnabled = FALSE;
@@ -18,11 +20,18 @@ BOOLEAN _IoApicEnabled = FALSE;
 extern ACPI_MADT_INTERRUPT_OVERRIDE* IntOverrides[];
 extern UINT NumIntOverrides;
 
+
+
 NSTATUS TestIrq(INTERRUPT_HANDLER_DATA* Interrupt) {
     KDebugPrint("IRQ Fired.");
 
     while(1) __halt();
 }
+
+void ApicEndOfInterrupt() {
+    ApicWrite(0xB0, 0);
+}
+
 
 ACPI_STATUS AcpiInitializeApicConfiguration() {
     ACPI_TABLE_MADT* Madt;
@@ -33,7 +42,7 @@ ACPI_STATUS AcpiInitializeApicConfiguration() {
 
     
 
-    void* LApicAddress = (void*)(UINT64)Madt->Address;
+    LApicAddress = (void*)(UINT64)Madt->Address;
 
     char* endptr = (char*)Madt + Madt->Header.Length;
 
@@ -57,7 +66,8 @@ ACPI_STATUS AcpiInitializeApicConfiguration() {
                         IoApicSetInterrupt,
                         IoApicRemoveInterrupt,
                         IoApicTerminateRouter,
-                        AcpiGetInterruptInformation
+                        AcpiGetInterruptInformation,
+                        ApicEndOfInterrupt
                     ) == STATUS_SUCCESS) {
                         _IoApicEnabled = TRUE;
                     }
@@ -120,13 +130,28 @@ ACPI_STATUS AcpiInitializeApicConfiguration() {
         ptr += Header->Length;
     }
 
-    NSTATUS s = ExInstallInterruptHandler(
-        0, 0, TestIrq, NULL
-    );
+    KeMapVirtualMemory(NULL, LApicAddress, LApicAddress, 1, PAGE_WRITE_ACCESS | PAGE_GLOBAL, 0);
 
-    KDebugPrint("ExInstallInt Status = %x", s);
+    // Hardware Enable the APIC
+    __writemsr(IA32_APIC_BASE_MSR, (UINT64)LApicAddress | IA32_APIC_BASE_MSR_ENABLE);
+    // Set Spurious Interrupt Register
+    ApicWrite(0xF0, ApicRead(0xF0) | 0x100);
+    // Enable APIC Timer
+
+    // NSTATUS s = ExInstallInterruptHandler(
+    //     0, 0, TestIrq, NULL
+    // );
+
+    // KDebugPrint("ExInstallInt Status = %x", s);
 
     
 
     return AE_OK;
+}
+
+UINT32 ApicRead(UINT Offset) {
+    return *(volatile UINT32*)((char*)LApicAddress + Offset);
+}
+void ApicWrite(UINT Offset, UINT32 Val) {
+    *(volatile UINT32*)((char*)LApicAddress + Offset) = Val;
 }

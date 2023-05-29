@@ -26,6 +26,8 @@ ACPI_STATUS AcpiInitializeHpetTable();
 ACPI_STATUS AcpiInitializeApicConfiguration();
 ACPI_STATUS AcpiInitializePcieConfiguration();
 
+#define IA32_APIC_BASE_MSR 0x1B
+#define IA32_APIC_BASE_MSR_ENABLE 0x800
 
 
 NSTATUS IoApicAddRouter(ACPI_MADT_IO_APIC* IoApic);
@@ -45,3 +47,6 @@ NSTATUS IoApicRemoveInterrupt(
 NSTATUS IoApicTerminateRouter();
 
 BOOLEAN AcpiGetInterruptInformation(UINT Irq, PIM_INTERRUPT_INFORMATION InterruptInformation);
+
+UINT32 ApicRead(UINT Offset);
+void ApicWrite(UINT Offset, UINT32 Val);
