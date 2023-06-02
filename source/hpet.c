@@ -128,5 +128,7 @@ ACPI_STATUS AcpiInitializeHpetTable() {
         return AE_ERROR;
     }
 
+    Stall(1000);
+
     return AE_OK;
 }

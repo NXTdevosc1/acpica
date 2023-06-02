@@ -366,9 +366,19 @@ AcpiOsReadPort (
     ACPI_IO_ADDRESS         Address,
     UINT32                  *Value,
     UINT32                  Width) {
-                KDebugPrint("AcpiOsReadPort");
+            KDebugPrint("AcpiOsReadPort");
+        
+    if(Width == 32) {
+        *Value = __indword(Address);
+    } else if(Width == 16) {
+        *Value = __inword(Address);
 
-        return 0;}
+    } else if(Width == 8) {
+        *Value = __inbyte(Address);
+    } else return AE_ERROR;
+
+    return AE_OK;
+}
 
 
 ACPI_STATUS
@@ -377,8 +387,16 @@ AcpiOsWritePort (
     UINT32                  Value,
     UINT32                  Width) {
                 KDebugPrint("AcpiOsWritePort");
+        if(Width == 32) {
+            __outdword(Address, Value);
+        } else if(Width == 16) {
+            __outword(Address, Value);
+        } else if(Width == 8) {
+            __outbyte(Address, Value);
+        } else return AE_ERROR;
 
-        return 0;}
+        return AE_OK;
+}
 
 
 // /*
@@ -390,8 +408,9 @@ AcpiOsReadMemory (
     UINT64                  *Value,
     UINT32                  Width) {
                 KDebugPrint("AcpiOsReadMem");
-
-        return 0;}
+        *Value = *(volatile UINT64*)Address;
+        return AE_OK;
+}
 
 ACPI_STATUS
 AcpiOsWriteMemory (
@@ -399,8 +418,19 @@ AcpiOsWriteMemory (
     UINT64                  Value,
     UINT32                  Width) {
                 KDebugPrint("AcpiOsWriteMem");
+        if(Width == 8) {
+            *(volatile UINT8*)Address = Value;
 
-        return 0;}
+        } else if(Width == 16) {
+            *(volatile UINT16*)Address = Value;
+
+        } else if(Width == 32) {
+            *(volatile UINT32*)Address = Value;
+
+        } else if(Width == 64) {
+            *(volatile UINT64*)Address = Value;
+        } else return AE_ERROR;
+        return AE_OK;}
 
 
 /*
