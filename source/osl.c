@@ -345,7 +345,7 @@ void
 AcpiOsSleep (
     UINT64                  Milliseconds) {
                 KDebugPrint("AcpiOsSleep %u ms", Milliseconds);
-
+                Stall(Milliseconds * 1000);
         return;}
 #include <intrin.h>
 void
@@ -353,7 +353,7 @@ AcpiOsStall (
     UINT32                  Microseconds) {
                 KDebugPrint("AcpiOsStall %u us", Microseconds);
 
-    for(UINT64 i = 0;i<0x10000;i++) _mm_pause();
+            Stall(Microseconds);
 
         return;}
 

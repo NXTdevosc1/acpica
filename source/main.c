@@ -45,13 +45,12 @@ NSTATUS NOSAPI DriverEntry(
 
 
     KDebugPrint("__AcpiInstallInitializationHandler__");
-    return STATUS_SUCCESS;
-    while(1);
+    // return STATUS_SUCCESS;
 
-    Status = AcpiInstallInitializationHandler(
-        AcpiInitializationHandler,
-        0
-    );
+    // Status = AcpiInstallInitializationHandler(
+    //     AcpiInitializationHandler,
+    //     0
+    // );
     KDebugPrint("___ENABLING_ACPI_SUBSYSTEM___");
     Status = AcpiEnableSubsystem(ACPI_FULL_INITIALIZATION);
     return Status;

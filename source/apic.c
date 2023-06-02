@@ -32,6 +32,9 @@ void ApicEndOfInterrupt() {
     ApicWrite(0xB0, 0);
 }
 
+void KiSetSchedulerData(
+    void* LocalApicAddress
+);
 
 ACPI_STATUS AcpiInitializeApicConfiguration() {
     ACPI_TABLE_MADT* Madt;
@@ -136,16 +139,10 @@ ACPI_STATUS AcpiInitializeApicConfiguration() {
     __writemsr(IA32_APIC_BASE_MSR, (UINT64)LApicAddress | IA32_APIC_BASE_MSR_ENABLE);
     // Set Spurious Interrupt Register
     ApicWrite(0xF0, ApicRead(0xF0) | 0x100);
-    // Enable APIC Timer
 
-    // NSTATUS s = ExInstallInterruptHandler(
-    //     0, 0, TestIrq, NULL
-    // );
 
-    // KDebugPrint("ExInstallInt Status = %x", s);
-
-    
-
+    // Enabling the APIC Timer is done by the kernel
+    KiSetSchedulerData(LApicAddress);
     return AE_OK;
 }
 
