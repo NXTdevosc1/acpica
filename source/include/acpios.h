@@ -50,3 +50,14 @@ BOOLEAN AcpiGetInterruptInformation(UINT Irq, PIM_INTERRUPT_INFORMATION Interrup
 
 UINT32 ApicRead(UINT Offset);
 void ApicWrite(UINT Offset, UINT32 Val);
+
+// PCI
+// if Allocation == NULL and returned value is TRUE
+// Then use the I/O PCI Bus
+BOOLEAN PciGetSegment(UINT8 PciSegment, ACPI_MCFG_ALLOCATION** Allocation);
+
+
+// Either succeeds or set a screen of death
+void AcpiSubsystemSetIoApicMode();
+
+void AcpiSubsystemNotifyHandler(ACPI_HANDLE Device, UINT32 Value, void* Context);

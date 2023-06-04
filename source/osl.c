@@ -17,6 +17,7 @@
 #include <acexcep.h>
 #include <nosefi.h>
 #include <intmgr.h>
+#include <acpios.h>
 // #include <efi/Uefi.h>
 /*
  * OSL Initialization and shutdown primitives
@@ -24,13 +25,13 @@
 ACPI_STATUS
 AcpiOsInitialize (
     void) {
-        KDebugPrint("AcpiOsInit");
+        // KDebugPrint("AcpiOsInit");
         return 0;}
 
 ACPI_STATUS
 AcpiOsTerminate (
     void) {
-        KDebugPrint("AcpiOsTerminate");
+        // KDebugPrint("AcpiOsTerminate");
         
         return 0;}
 
@@ -41,7 +42,7 @@ AcpiOsTerminate (
 ACPI_PHYSICAL_ADDRESS
 AcpiOsGetRootPointer (
     void) {
-        KDebugPrint("AcpiOsGetRootPtr");
+        // KDebugPrint("AcpiOsGetRootPtr");
 
         GUID g = EFI_ACPI_20_TABLE_GUID;
         ACPI_PHYSICAL_ADDRESS Addr = (ACPI_PHYSICAL_ADDRESS)KeFindSystemFirmwareTable("RSD PTR ", &g);
@@ -54,9 +55,9 @@ ACPI_STATUS
 AcpiOsPredefinedOverride (
     const ACPI_PREDEFINED_NAMES *InitVal,
     ACPI_STRING                 *NewVal) {
-        KDebugPrint("AcpiOsPredefinedOverride Name : %s Type : %u Val : %s", InitVal->Name, InitVal->Type, InitVal->Val);
-        KDebugPrint(InitVal->Name);
-        KDebugPrint(InitVal->Val);
+        // KDebugPrint("AcpiOsPredefinedOverride Name : %s Type : %u Val : %s", InitVal->Name, InitVal->Type, InitVal->Val);
+        // KDebugPrint(InitVal->Name);
+        // KDebugPrint(InitVal->Val);
         
         *NewVal = NULL;
         return AE_OK;
@@ -66,9 +67,9 @@ ACPI_STATUS
 AcpiOsTableOverride (
     ACPI_TABLE_HEADER       *ExistingTable,
     ACPI_TABLE_HEADER       **NewTable) {
-        KDebugPrint("AcpiOsTableOverride %s",
-        ExistingTable->Signature
-        );
+        // KDebugPrint("AcpiOsTableOverride %s",
+        // ExistingTable->Signature
+        // );
 
         *NewTable = NULL;
         return AE_OK;
@@ -79,9 +80,9 @@ AcpiOsPhysicalTableOverride (
     ACPI_TABLE_HEADER       *ExistingTable,
     ACPI_PHYSICAL_ADDRESS   *NewAddress,
     UINT32                  *NewTableLength) {
-        KDebugPrint("AcpiOsPTableOverride %s",
-        ExistingTable->Signature
-        );
+        // KDebugPrint("AcpiOsPTableOverride %s",
+        // ExistingTable->Signature
+        // );
 
         *NewAddress = 0;
         *NewTableLength = 0;
@@ -97,7 +98,7 @@ SPINLOCK Locks[256] = {0};
 ACPI_STATUS
 AcpiOsCreateLock (
     ACPI_SPINLOCK           *OutHandle) {
-        KDebugPrint("AcpiOsCreateLock");
+        // KDebugPrint("AcpiOsCreateLock");
 
         *OutHandle = Locks + NumLocks;
         NumLocks++;
@@ -107,14 +108,14 @@ AcpiOsCreateLock (
 void
 AcpiOsDeleteLock (
     ACPI_SPINLOCK           Handle) {
-        KDebugPrint("AcpiOsDeleteLock");
+        // KDebugPrint("AcpiOsDeleteLock");
 
     }
 
 ACPI_CPU_FLAGS
 AcpiOsAcquireLock (
     ACPI_SPINLOCK           Handle) {
-        KDebugPrint("AcpiOsAcquireLock");
+        // KDebugPrint("AcpiOsAcquireLock");
 
         return ExAcquireSpinLock(Handle);
     }
@@ -123,7 +124,7 @@ void
 AcpiOsReleaseLock (
     ACPI_SPINLOCK           Handle,
     ACPI_CPU_FLAGS          Flags) {
-        KDebugPrint("AcpiOsReleaseLock");
+        // KDebugPrint("AcpiOsReleaseLock");
 
         ExReleaseSpinLock(Handle, Flags);
     }
@@ -139,7 +140,7 @@ AcpiOsCreateSemaphore (
     UINT32                  MaxUnits,
     UINT32                  InitialUnits,
     ACPI_SEMAPHORE          *OutHandle) {
-        KDebugPrint("AcpiOsCreateSemaphore");
+        // KDebugPrint("AcpiOsCreateSemaphore");
 
         ExInitSemaphore(Sem + semindex, InitialUnits);
         *OutHandle = Sem + semindex;
@@ -150,7 +151,7 @@ AcpiOsCreateSemaphore (
 ACPI_STATUS
 AcpiOsDeleteSemaphore (
     ACPI_SEMAPHORE          Handle) {
-        KDebugPrint("AcpiOsDeleteSemaphore");
+        // KDebugPrint("AcpiOsDeleteSemaphore");
         
         return AE_OK;}
 
@@ -159,7 +160,7 @@ AcpiOsWaitSemaphore (
     ACPI_SEMAPHORE          Handle,
     UINT32                  Units,
     UINT16                  Timeout) {
-                KDebugPrint("AcpiOsWaitSemaphore");
+                // KDebugPrint("AcpiOsWaitSemaphore");
 
         return !ExSemaphoreWait(Handle, Timeout);
     }
@@ -168,7 +169,7 @@ ACPI_STATUS
 AcpiOsSignalSemaphore (
     ACPI_SEMAPHORE          Handle,
     UINT32                  Units) {
-                KDebugPrint("AcpiOsSignalSem");
+                // KDebugPrint("AcpiOsSignalSem");
 
         while(Units) {
             if(ExSemaphoreSignal(Handle)) return AE_OK;
@@ -187,16 +188,18 @@ AcpiOsSignalSemaphore (
 void *
 AcpiOsAllocate (
     ACPI_SIZE               Size) {
-                KDebugPrint("AcpiOsAlloc %x", Size);
+        void* p = MmAllocatePool(Size, 0);
+                // KDebugPrint("AcpiOsAlloc s: 0x%x adr : 0x%x", Size, p);
 
-        return MmAllocatePool(Size, 0);}
+        return p;
+    }
 #endif
 
 #ifndef ACPI_USE_ALTERNATE_PROTOTYPE_AcpiOsFree
 void
 AcpiOsFree (
     void *                  Memory) {
-                KDebugPrint("AcpiOsFree %x", Memory);
+                // KDebugPrint("AcpiOsFree %x", Memory);
 
         MmFreePool(Memory);}
 #endif
@@ -207,7 +210,7 @@ void *
 AcpiOsMapMemory (
     ACPI_PHYSICAL_ADDRESS   Where,
     ACPI_SIZE               Length) {
-                KDebugPrint("AcpiOsMap addr : %x len : %x", Where, Length);
+                // KDebugPrint("AcpiOsMap addr : %x len : %x", Where, Length);
         UINT64 NumPages = Length + (Where & 0xFFF);
         if(NumPages & 0xFFF) NumPages+=0x1000;
         NumPages >>= 12;
@@ -239,7 +242,7 @@ void
 AcpiOsUnmapMemory (
     void                    *LogicalAddress,
     ACPI_SIZE               Size) {
-               KDebugPrint("AcpiOsUnmap addr : %x sz : %x", LogicalAddress, Size);
+            //    KDebugPrint("AcpiOsUnmap addr : %x sz : %x", LogicalAddress, Size);
                 UINT64 NumPages = Size + ((UINT64)LogicalAddress & 0xFFF);
         if(NumPages & 0xFFF) NumPages+=0x1000;
         NumPages >>= 12;
@@ -250,7 +253,7 @@ ACPI_STATUS
 AcpiOsGetPhysicalAddress (
     void                    *LogicalAddress,
     ACPI_PHYSICAL_ADDRESS   *PhysicalAddress) {
-                KDebugPrint("AcpiOsGetPhysAddr");
+                // KDebugPrint("AcpiOsGetPhysAddr");
 
         *PhysicalAddress = (ACPI_PHYSICAL_ADDRESS)KeConvertPointer(NULL, LogicalAddress);
         if(*PhysicalAddress == 0) return AE_NOT_FOUND;
@@ -277,6 +280,7 @@ NSTATUS AcpiInterruptHandler(INTERRUPT_HANDLER_DATA* HandlerData) {
     UINT64 ContextId = (UINT64)HandlerData->Context;
     KDebugPrint("ACPI Interrupt.");
     Contexes[ContextId].Handler(Contexes[ContextId].Context);
+    while(1);
     return STATUS_SUCCESS;
 }
 
@@ -321,37 +325,37 @@ AcpiOsRemoveInterruptHandler (
 ACPI_THREAD_ID
 AcpiOsGetThreadId (
     void) {
-                KDebugPrint("AcpiOsGetThreadId");
+                // KDebugPrint("AcpiOsGetThreadId");
 
-        return 0;}
+        return 1;}
 
 ACPI_STATUS
 AcpiOsExecute (
     ACPI_EXECUTE_TYPE       Type,
     ACPI_OSD_EXEC_CALLBACK  Function,
     void                    *Context) {
-                KDebugPrint("AcpiOsExecute");
+                // KDebugPrint("AcpiOsExecute");
 
         return 0;}
 
 void
 AcpiOsWaitEventsComplete (
     void) {
-                KDebugPrint("AcpiOsWaitEvtComplete");
+                // KDebugPrint("AcpiOsWaitEvtComplete");
 
     }
 
 void
 AcpiOsSleep (
     UINT64                  Milliseconds) {
-                KDebugPrint("AcpiOsSleep %u ms", Milliseconds);
+                // KDebugPrint("AcpiOsSleep %u ms", Milliseconds);
                 Stall(Milliseconds * 1000);
         return;}
 #include <intrin.h>
 void
 AcpiOsStall (
     UINT32                  Microseconds) {
-                KDebugPrint("AcpiOsStall %u us", Microseconds);
+                // KDebugPrint("AcpiOsStall %u us", Microseconds);
 
             Stall(Microseconds);
 
@@ -366,7 +370,7 @@ AcpiOsReadPort (
     ACPI_IO_ADDRESS         Address,
     UINT32                  *Value,
     UINT32                  Width) {
-            KDebugPrint("AcpiOsReadPort");
+            // KDebugPrint("AcpiOsReadPort");
         
     if(Width == 32) {
         *Value = __indword(Address);
@@ -386,7 +390,7 @@ AcpiOsWritePort (
     ACPI_IO_ADDRESS         Address,
     UINT32                  Value,
     UINT32                  Width) {
-                KDebugPrint("AcpiOsWritePort");
+                // KDebugPrint("AcpiOsWritePort");
         if(Width == 32) {
             __outdword(Address, Value);
         } else if(Width == 16) {
@@ -407,7 +411,7 @@ AcpiOsReadMemory (
     ACPI_PHYSICAL_ADDRESS   Address,
     UINT64                  *Value,
     UINT32                  Width) {
-                KDebugPrint("AcpiOsReadMem");
+                // KDebugPrint("AcpiOsReadMem");
         *Value = *(volatile UINT64*)Address;
         return AE_OK;
 }
@@ -417,7 +421,7 @@ AcpiOsWriteMemory (
     ACPI_PHYSICAL_ADDRESS   Address,
     UINT64                  Value,
     UINT32                  Width) {
-                KDebugPrint("AcpiOsWriteMem");
+                // KDebugPrint("AcpiOsWriteMem");
         if(Width == 8) {
             *(volatile UINT8*)Address = Value;
 
@@ -444,9 +448,20 @@ AcpiOsReadPciConfiguration (
     UINT32                  Reg,
     UINT64                  *Value,
     UINT32                  Width) {
-                KDebugPrint("AcpiOsReadPci");
-
-        return 0;}
+    ACPI_MCFG_ALLOCATION* Allocation;
+    KDebugPrint("AcpiOsReadPci");
+    if(PciGetSegment(PciId->Segment, &Allocation)) {
+        if(!Allocation) {
+            KDebugPrint("TODO: READ I/O");
+            while(1);
+        } else {
+            if(PciId->Bus < Allocation->StartBusNumber) return AE_ERROR;
+            *Value = *(UINT64*)(Allocation->Address + ((PciId->Bus - Allocation->StartBusNumber) << 20) | (PciId->Device << 15) | (PciId->Function << 12));
+        }
+        return AE_OK;
+    }
+    return AE_ERROR;    
+}
 
 ACPI_STATUS
 AcpiOsWritePciConfiguration (
@@ -455,8 +470,28 @@ AcpiOsWritePciConfiguration (
     UINT64                  Value,
     UINT32                  Width) {
                 KDebugPrint("AcpiOsWritePci");
+    ACPI_MCFG_ALLOCATION* Allocation;
 
-        return 0;}
+        if(PciGetSegment(PciId->Segment, &Allocation)) {
+            if(!Allocation) {
+                KDebugPrint("TODO: READ I/O");
+                while(1);
+            } else {
+                if(PciId->Bus < Allocation->StartBusNumber) return AE_ERROR;
+                if(Width == 64) {
+                    *(UINT64*)(Allocation->Address + ((PciId->Bus - Allocation->StartBusNumber) << 20) | (PciId->Device << 15) | (PciId->Function << 12)) = Value;
+                } else if(Width == 32) {
+                    *(UINT32*)(Allocation->Address + ((PciId->Bus - Allocation->StartBusNumber) << 20) | (PciId->Device << 15) | (PciId->Function << 12)) = Value;
+                } else if(Width == 16) {
+                    *(UINT16*)(Allocation->Address + ((PciId->Bus - Allocation->StartBusNumber) << 20) | (PciId->Device << 15) | (PciId->Function << 12)) = Value;
+                } else if(Width == 8) {
+                    *(UINT8*)(Allocation->Address + ((PciId->Bus - Allocation->StartBusNumber) << 20) | (PciId->Device << 15) | (PciId->Function << 12)) = Value;
+                } else return AE_ERROR;
+            }
+            return AE_OK;
+        }
+        return AE_ERROR;
+}
 
 
 /*
@@ -466,7 +501,7 @@ BOOLEAN
 AcpiOsReadable (
     void                    *Pointer,
     ACPI_SIZE               Length) {
-                KDebugPrint("AcpiOsReadable");
+                // KDebugPrint("AcpiOsReadable");
 
         return KeCheckMemoryAccess(NULL, Pointer, Length, NULL);
     }
@@ -475,7 +510,7 @@ BOOLEAN
 AcpiOsWritable (
     void                    *Pointer,
     ACPI_SIZE               Length) {
-                KDebugPrint("AcpiOsWritable");
+                // KDebugPrint("AcpiOsWritable");
 
         UINT64 f;
         if(KeCheckMemoryAccess(NULL, Pointer, Length, &f)) {
@@ -483,17 +518,22 @@ AcpiOsWritable (
         }
         return FALSE;
     }
-
+extern PKTIMER _HpetTimerObject;
 UINT64
 AcpiOsGetTimer (
-    void) {        KDebugPrint("AcpiOsGetTimer");
-return 0;}
+    void) {
+        // Read time & Convert it to 100 nanosecond unit
+        UINT64 Time = KeGetTimeSinceBoot() * 10;
+        KDebugPrint("AcpiOsGetTimer %x", Time);
+    
+        return Time;
+}
 
 ACPI_STATUS
 AcpiOsSignal (
     UINT32                  Function,
     void                    *Info) {
-                KDebugPrint("AcpiOsSignal");
+                KDebugPrint("UNIMPLEMENTED !! __ AcpiOsSignal");
 
         return 0;}
 

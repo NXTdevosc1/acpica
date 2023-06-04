@@ -45,6 +45,7 @@ typedef volatile struct {
 HPET_REGISTERS* HpetRegisters;
 PDEVICE HpetDevice;
 volatile UINT64 HpetFrequency = 0;
+PKTIMER _HpetTimerObject = NULL;
 UINT64 HpetReadCounter() {
     return HpetRegisters->MainCounterValue;
 }
@@ -128,7 +129,7 @@ ACPI_STATUS AcpiInitializeHpetTable() {
         return AE_ERROR;
     }
 
-    Stall(1000);
+    _HpetTimerObject = Tmr;
 
     return AE_OK;
 }

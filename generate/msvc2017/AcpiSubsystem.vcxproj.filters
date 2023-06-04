@@ -658,6 +658,9 @@
     <ClCompile Include="..\..\source\components\executer\exserial.c">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\source\components\executer\extrace.c">
+      <Filter>Source Files\Interpreter</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\source\include\acbuffer.h">

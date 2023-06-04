@@ -417,6 +417,7 @@
     <ClCompile Include="..\..\source\components\executer\exstoren.c" />
     <ClCompile Include="..\..\source\components\executer\exstorob.c" />
     <ClCompile Include="..\..\source\components\executer\exsystem.c" />
+    <ClCompile Include="..\..\source\components\executer\extrace.c" />
     <ClCompile Include="..\..\source\components\executer\exutils.c" />
     <ClCompile Include="..\..\source\components\hardware\hwacpi.c" />
     <ClCompile Include="..\..\source\components\hardware\hwesleep.c" />

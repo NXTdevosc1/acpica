@@ -187,3 +187,18 @@ BOOLEAN AcpiGetInterruptInformation(UINT Irq, PIM_INTERRUPT_INFORMATION Interrup
     
     return TRUE;
 }
+
+void AcpiSubsystemSetIoApicMode() {
+    ACPI_OBJECT_LIST Param;
+    ACPI_OBJECT Arg;
+    Arg.Type = ACPI_TYPE_INTEGER;
+    Arg.Integer.Value = 1; // IOAPIC
+
+    Param.Count = 1;
+    Param.Pointer = &Arg;
+    char* Pic =  "\\_PIC";
+    ACPI_STATUS Status = AcpiEvaluateObject(
+        NULL, "\\_PIC", &Param, NULL
+    );
+    KDebugPrint("Evaluate _PIC Status = %x", Status);
+}
