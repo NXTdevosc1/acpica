@@ -26,6 +26,19 @@ void _disable();
 #pragma intrinsic(_disable)
 
 
+/*
+
+ * This function should only be called once,
+    when the ACPI Driver initializes the interrupting system in the kernel
+    and initializes the APIC and HPET along with other essential tables
+
+    This is the last step of kernel initialization, this function finally enables interrupts
+    and sets up the task scheduling system
+*/
+void KRNLAPI KeSchedulingSystemInit();
+
+/*-------------------------------------------------------*/
+
 NSTATUS NOSAPI DriverEntry(
     void* Driver
 ) {
@@ -44,13 +57,26 @@ NSTATUS NOSAPI DriverEntry(
 
 
     // Initialize Required Kernel Tables
-    AcpiInitializeApicConfiguration();
-    AcpiInitializeHpetTable();
-    AcpiInitializePcieConfiguration();
+    if((Status = AcpiInitializeApicConfiguration()) != AE_OK) return Status;
+    if((Status = AcpiInitializePcieConfiguration()) != AE_OK) return Status;
+
+    // *** From here:
+    if((Status = AcpiHpetInit()) != AE_OK) return Status;
+
 
     KDebugPrint("__AcpiLoadTables__");
     Status = AcpiLoadTables();
     if(Status != AE_OK) return Status;
+
+    // *** To here should ideally take less than 1 second
+
+    KDebugPrint("Completing secondary ACPI Tables initialization");
+    // *** Now we will set IOAPIC Mode and enable interrupts in the kernel
+    AcpiSubsystemSetIoApicMode();
+
+    // Now we will execute the last step of kernel initialization
+    KeSchedulingSystemInit();
+
 
     KDebugPrint("Tables:");
     ACPI_TABLE_HEADER* Table;
@@ -74,15 +100,13 @@ NSTATUS NOSAPI DriverEntry(
     Status = AcpiInitializeObjects(ACPI_FULL_INITIALIZATION);
     if(Status != AE_OK) return Status;
 
-    KDebugPrint("Completing secondary ACPI Tables initialization");
-    AcpiSubsystemSetIoApicMode();
 
     KDebugPrint("__ACPI_GET_DEVICES__");
 
     
 
 
-    // Status = AcpiGetDevices(NULL, WalkCallback, NULL, NULL);
+    Status = AcpiGetDevices("PCI0", WalkCallback, NULL, NULL);
     // AcpiEnterSleepStatePrep(5);
     // _disable();
     // KDebugPrint("Shutting Down...");

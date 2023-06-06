@@ -35,7 +35,12 @@ void ApicEndOfInterrupt() {
 void KiSetSchedulerData(
     void* LocalApicAddress
 );
+NSTATUS ApicSpuriousInterruptHandler(INTERRUPT_HANDLER_DATA* HandlerData) {
+    KDebugPrint("***SPURIOUS_INTERRUPT***");
 
+    // You should not send EOI for spurious interrupts
+    return STATUS_SUCCESS;
+}
 ACPI_STATUS AcpiInitializeApicConfiguration() {
     ACPI_TABLE_MADT* Madt;
     ACPI_STATUS Status = AcpiGetTable("APIC", 0, (ACPI_TABLE_HEADER**)&Madt);
@@ -132,19 +137,33 @@ ACPI_STATUS AcpiInitializeApicConfiguration() {
         }
         ptr += Header->Length;
     }
-
-    KeMapVirtualMemory(NULL, LApicAddress, LApicAddress, 1, PAGE_WRITE_ACCESS | PAGE_GLOBAL, 0);
-
+    // Find somewhere to put the local apic in the system space
+    void* _p = KeFindAvailableAddressSpace(NULL, 1, NULL, NULL, 0);
+    KeMapVirtualMemory(NULL, LApicAddress, _p, 1, PAGE_WRITE_ACCESS | PAGE_GLOBAL, 0);
+    KeReleaseControlFlag(NULL, PROCESS_MANAGE_ADDRESS_SPACE);
     // Hardware Enable the APIC
     __writemsr(IA32_APIC_BASE_MSR, (UINT64)LApicAddress | IA32_APIC_BASE_MSR_ENABLE);
-    // Set Spurious Interrupt Register
-    ApicWrite(0xF0, ApicRead(0xF0) | 0x100);
+    LApicAddress = _p;
 
 
-    // Enabling the APIC Timer is done by the kernel
+    // Enable APIC
+    ApicWrite(0x80, 0); // Set TASK_PRIORITY
+    ApicWrite(0xD0, 0); // Set LOGICAL_DESTINATION
+    ApicWrite(0xE0, 0); // SET DESTINATION_FORMAT
+    ApicWrite(0xF0, 0x1FF); // Set SPURIOUS_INTERRUPT_VECTOR
+    UINT8 Spurious;
+    if(!KeRegisterSystemInterrupt(0, &Spurious, TRUE, TRUE, ApicSpuriousInterruptHandler)) {
+        KDebugPrint("APIC Initialization failed. KeRegisterSystemInterrupt != TRUE.");
+        return AE_ERROR;
+    }
+
+    // Enabling the APIC Timer is done by the kernel on the final initialization step
+
+    // Set scheduler data
     KiSetSchedulerData(LApicAddress);
     return AE_OK;
 }
+
 
 UINT32 ApicRead(UINT Offset) {
     return *(volatile UINT32*)((char*)LApicAddress + Offset);

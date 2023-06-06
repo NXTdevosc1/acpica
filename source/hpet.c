@@ -64,7 +64,7 @@ NSTATUS HpetInterruptHandler(
     return STATUS_SUCCESS;
 }
 
-ACPI_STATUS AcpiInitializeHpetTable() {
+ACPI_STATUS AcpiHpetInit() {
     ACPI_TABLE_HPET* Hpet;
     ACPI_STATUS Status = AcpiGetTable("HPET", 0, (ACPI_TABLE_HEADER**)&Hpet);
     FAILED_RETURN(Status);

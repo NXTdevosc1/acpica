@@ -200,5 +200,10 @@ void AcpiSubsystemSetIoApicMode() {
     ACPI_STATUS Status = AcpiEvaluateObject(
         NULL, "\\_PIC", &Param, NULL
     );
+    if(Status != AE_OK) {
+        // Set death screen
+        KDebugPrint("Failed to enable IOAPIC Mode.");
+        while(1) __halt();
+    }
     KDebugPrint("Evaluate _PIC Status = %x", Status);
 }

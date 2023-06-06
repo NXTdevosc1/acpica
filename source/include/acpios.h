@@ -22,7 +22,7 @@
 
 #define FAILED_RETURN(s) if(s != AE_OK) return s;
 
-ACPI_STATUS AcpiInitializeHpetTable();
+ACPI_STATUS AcpiHpetInit();
 ACPI_STATUS AcpiInitializeApicConfiguration();
 ACPI_STATUS AcpiInitializePcieConfiguration();
 
@@ -61,3 +61,5 @@ BOOLEAN PciGetSegment(UINT8 PciSegment, ACPI_MCFG_ALLOCATION** Allocation);
 void AcpiSubsystemSetIoApicMode();
 
 void AcpiSubsystemNotifyHandler(ACPI_HANDLE Device, UINT32 Value, void* Context);
+
+
