@@ -61,7 +61,19 @@ ACPI_STATUS AcpiInitializeApicConfiguration() {
         switch(Header->Type) {
             case ACPI_MADT_TYPE_LOCAL_APIC: {
                 ACPI_MADT_LOCAL_APIC* lapic = (void*)ptr;
-                
+
+                // registering cpu with same id will crash the system
+                if(lapic->Id != KeGetCurrentProcessorId()) {
+                    PROCESSOR_IDENTIFICATION_DATA Identification = {0};
+                    Identification.ProcessorId = lapic->Id;
+                    Identification.Context = lapic;
+                    if(lapic->LapicFlags & 3) {
+                        Identification.Characteristics |= PROCESSOR_BOOTABLE;
+                    }
+                    KeRegisterProcessor(
+                        &Identification
+                    );
+                }
                 KDebugPrint("lapic id %x flags %x pid %x", lapic->Id, lapic->LapicFlags, lapic->ProcessorId);
                 break;
             }
@@ -150,12 +162,12 @@ ACPI_STATUS AcpiInitializeApicConfiguration() {
     ApicWrite(0x80, 0); // Set TASK_PRIORITY
     ApicWrite(0xD0, 0); // Set LOGICAL_DESTINATION
     ApicWrite(0xE0, 0); // SET DESTINATION_FORMAT
-    ApicWrite(0xF0, 0x1FF); // Set SPURIOUS_INTERRUPT_VECTOR
     UINT8 Spurious;
     if(!KeRegisterSystemInterrupt(0, &Spurious, TRUE, TRUE, ApicSpuriousInterruptHandler)) {
         KDebugPrint("APIC Initialization failed. KeRegisterSystemInterrupt != TRUE.");
         return AE_ERROR;
     }
+    ApicWrite(0xF0, 0x100 | Spurious); // Set SPURIOUS_INTERRUPT_VECTOR
 
     // Enabling the APIC Timer is done by the kernel on the final initialization step
 
