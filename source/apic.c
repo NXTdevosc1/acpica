@@ -158,7 +158,7 @@ ACPI_STATUS AcpiInitializeApicConfiguration() {
     LApicAddress = _p;
 
 
-    // Enable APIC
+    // Enable APIC (from nos/processor/initcpu.c)
     ApicWrite(0x80, 0); // Set TASK_PRIORITY
     ApicWrite(0xD0, 0); // Set LOGICAL_DESTINATION
     ApicWrite(0xE0, 0); // SET DESTINATION_FORMAT
