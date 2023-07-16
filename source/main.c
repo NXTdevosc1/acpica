@@ -3,6 +3,8 @@
 
 
 #include <acpios.h>
+#include <AcpiSystem/acpiio.h>
+
 
 ACPI_STATUS AcpiInitializationHandler(
     ACPI_HANDLE Object,
@@ -11,6 +13,8 @@ ACPI_STATUS AcpiInitializationHandler(
     KDebugPrint("Handler called");
     return AE_OK;
 }
+
+
 
 ACPI_STATUS WalkCallback(ACPI_HANDLE Object, UINT32 NestingLevel, void *Context, void **ReturnValue) {
     ACPI_BUFFER bf;
@@ -38,6 +42,8 @@ void _disable();
 void KRNLAPI KeSchedulingSystemInit();
 
 /*-------------------------------------------------------*/
+
+PDEVICE AcpiDevice = NULL;
 
 NSTATUS NOSAPI DriverEntry(
     void* Driver
@@ -101,19 +107,19 @@ NSTATUS NOSAPI DriverEntry(
     if(Status != AE_OK) return Status;
 
 
-    KDebugPrint("__ACPI_GET_DEVICES__");
+    KDebugPrint("Creating ACPI Device Object");
+    AcpiDevice = KeCreateDevice(
+        DEVICE_COMPUTER_MANAGEMENT,
+        0,
+        L"Advanced Configuration And Power Interface 2.0+",
+        NULL
+    );
 
-    
+    IO_INTERFACE_DESCRIPTOR AcpiIo = {0};
+    AcpiIo.NumFunctions = ACPIO_NUM_FUNCTIONS;
+    AcpiIo.IoCallback = AcpiIoCallback;
 
+    IoSetInterface(AcpiDevice, &AcpiIo);
 
-    Status = AcpiGetDevices("PCI0", WalkCallback, NULL, NULL);
-    // AcpiEnterSleepStatePrep(5);
-    // _disable();
-    // KDebugPrint("Shutting Down...");
-    // AcpiEnterSleepState(5);
-    // KDebugPrint("Shutdown Done!");
-    return Status;
-    // return STATUS_OK;
-    // while(1) __halt();
     return STATUS_SUCCESS;
 }

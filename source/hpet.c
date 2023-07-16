@@ -72,8 +72,7 @@ ACPI_STATUS AcpiHpetInit() {
 
     HpetRegisters = AcpiOsMapMemory(Hpet->Address.Address, 0x1000);
     KDebugPrint("HPET Found Address : %x, HPET Mapped Address : %x", Hpet->Address.Address, HpetRegisters);
-
-    HpetDevice = PnpCreateDevice(DEVICE_TIMER, 0, L"ACPI/HPET", L"High Performance Event Timer");
+    HpetDevice = KeCreateDevice(DEVICE_TIMER, 0, L"High Performance Event Timer", NULL);
     if(!HpetDevice) return AE_ERROR;
     // Configure Hpet
     HpetRegisters->GeneralConfiguration &= ~HPET_ENABLE;

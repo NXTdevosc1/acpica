@@ -230,12 +230,12 @@ AcpiOsMapMemory (
             (void*)Where,
             Vmem,
             NumPages,
-            PAGE_WRITE_ACCESS | PAGE_GLOBAL,
+            PAGE_WRITE_ACCESS | PAGE_EXECUTE,
             0
         );
 
         KeReleaseControlFlag(NULL, PROCESS_MANAGE_ADDRESS_SPACE);
-        return Vmem;
+        return (void*)((UINT64)Vmem + (Where & 0xFFF));
     }
 
 void
@@ -273,14 +273,29 @@ UINT64 NumContexes = 0;
 struct {
     ACPI_OSD_HANDLER Handler;
     void* Context;
-} Contexes[128];
+} AcpiIrqs[200];
+
+static UINT ic = 0;
+static UINT ics[8] = {
+    0xFFFFFF,
+    0xFF,
+    0xFFFF,
+    0xFF00,
+    0xFF0000,
+    0xFF00FF,
+    0xFFFF00,
+    0
+};
+
+void KRNLAPI __KiClearScreen(UINT Color);
 
 NSTATUS AcpiInterruptHandler(INTERRUPT_HANDLER_DATA* HandlerData) {
-    
+    if(ic == 8) ic = 0;
+    __KiClearScreen(ics[ic]);
+    ic++;
     UINT64 ContextId = (UINT64)HandlerData->Context;
     KDebugPrint("ACPI Interrupt.");
-    Contexes[ContextId].Handler(Contexes[ContextId].Context);
-    while(1);
+    AcpiIrqs[HandlerData->InterruptNumber].Handler(AcpiIrqs[HandlerData->InterruptNumber].Context);
     return STATUS_SUCCESS;
 }
 
@@ -289,18 +304,18 @@ AcpiOsInstallInterruptHandler (
     UINT32                  InterruptNumber,
     ACPI_OSD_HANDLER        ServiceRoutine,
     void                    *Context) {
-                KDebugPrint("AcpiOsInstallInt");
+                KDebugPrint("AcpiOsInstallInt#%d ISR %x CTX %x", InterruptNumber, ServiceRoutine, Context);
 
         NSTATUS s = ExInstallInterruptHandler(
             InterruptNumber,
-            0,
+            IM_LEVEL_TRIGGERED, // GSI's are by default level triggered
             AcpiInterruptHandler,
-            (void*)(NumContexes)
+            NULL
         );
-        Contexes[NumContexes].Handler = ServiceRoutine;
-        Contexes[NumContexes].Context = Context;
-        NumContexes++;
+        AcpiIrqs[InterruptNumber].Handler = ServiceRoutine;
+        AcpiIrqs[InterruptNumber].Context = Context;
         if(s == STATUS_SUCCESS) return AE_OK;
+        KDebugPrint("AcpiOsInstallInt Failed code %d", s);
         return AE_NOT_ACQUIRED;
     }
 
@@ -325,18 +340,18 @@ AcpiOsRemoveInterruptHandler (
 ACPI_THREAD_ID
 AcpiOsGetThreadId (
     void) {
-                // KDebugPrint("AcpiOsGetThreadId");
-
-        return 1;}
+        UINT64 ThreadId = KeGetCurrentThreadId();
+        return ThreadId;
+    }
 
 ACPI_STATUS
 AcpiOsExecute (
     ACPI_EXECUTE_TYPE       Type,
     ACPI_OSD_EXEC_CALLBACK  Function,
     void                    *Context) {
-                // KDebugPrint("AcpiOsExecute");
-
-        return 0;}
+        KDebugPrint("ACPI OS EXECUTE Type : %d Fun : %x Context : %x", Type, Function, Context);
+        return KeCreateThread(NULL, NULL, 0, Function, Context);            
+    }
 
 void
 AcpiOsWaitEventsComplete (
@@ -609,63 +624,15 @@ return;}
 ACPI_STATUS
 AcpiOsWaitCommandReady (
     void) {        KDebugPrint("AcpiOsWaitCmdReady");
-return 0;}
+return AE_NOT_IMPLEMENTED;}
 #endif
 
 #ifndef ACPI_USE_ALTERNATE_PROTOTYPE_AcpiOsNotifyCommandComplete
 ACPI_STATUS
 AcpiOsNotifyCommandComplete (
     void) {        KDebugPrint("AcpiOsNotifyCmdComplete");
-return 0;}
+return AE_NOT_IMPLEMENTED;}
 #endif
-
-#ifndef ACPI_USE_ALTERNATE_PROTOTYPE_AcpiOsTracePoint
-void
-AcpiOsTracePoint (
-    ACPI_TRACE_EVENT_TYPE   Type,
-    BOOLEAN                 Begin,
-    UINT8                   *Aml,
-    char                    *Pathname) {        KDebugPrint("AcpiOsTracePoint");
-return;}
-#endif
-
-
-/*
- * Obtain ACPI table(s)
- */
-#ifndef ACPI_USE_ALTERNATE_PROTOTYPE_AcpiOsGetTableByName
-ACPI_STATUS
-AcpiOsGetTableByName (
-    char                    *Signature,
-    UINT32                  Instance,
-    ACPI_TABLE_HEADER       **Table,
-    ACPI_PHYSICAL_ADDRESS   *Address) {
-        KDebugPrint("AcpiOsGetTableByName");
-        return 0;}
-#endif
-
-#ifndef ACPI_USE_ALTERNATE_PROTOTYPE_AcpiOsGetTableByIndex
-ACPI_STATUS
-AcpiOsGetTableByIndex (
-    UINT32                  Index,
-    ACPI_TABLE_HEADER       **Table,
-    UINT32                  *Instance,
-    ACPI_PHYSICAL_ADDRESS   *Address) {
-        KDebugPrint("AcpiOsGetTableByIndex");
-        
-        return 0;}
-#endif
-
-#ifndef ACPI_USE_ALTERNATE_PROTOTYPE_AcpiOsGetTableByAddress
-ACPI_STATUS
-AcpiOsGetTableByAddress (
-    ACPI_PHYSICAL_ADDRESS   Address,
-    ACPI_TABLE_HEADER       **Table) {
-        KDebugPrint("AcpiOsGetTableByAddress");
-        
-        return 0;}
-#endif
-
 
 /*
  * Directory manipulation

@@ -63,3 +63,6 @@ void AcpiSubsystemSetIoApicMode();
 void AcpiSubsystemNotifyHandler(ACPI_HANDLE Device, UINT32 Value, void* Context);
 
 
+IORESULT __cdecl AcpiIoCallback(
+    IOPARAMS
+);
