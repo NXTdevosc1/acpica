@@ -20,6 +20,9 @@
 #include <intrin.h>
 #include <intmgr.h>
 
+void* memset(void* addr, int val, unsigned long long nb);
+#pragma intrinsic(memset)
+
 #define FAILED_RETURN(s) if(s != AE_OK) return s;
 
 ACPI_STATUS AcpiHpetInit();

@@ -45,15 +45,19 @@ void KRNLAPI KeSchedulingSystemInit();
 
 PDEVICE AcpiDevice = NULL;
 
+void KRNLAPI KiDrawDebugRect(UINT8 DbgStage);
+
 NSTATUS NOSAPI DriverEntry(
     void* Driver
 ) {
     KDebugPrint("Driver Startup.");
+    KiDrawDebugRect(0);
     ACPI_STATUS Status = AcpiInitializeSubsystem();
     if(Status != AE_OK) {
         KDebugPrint("ACPI Initialization failed, status : %.16x", Status);
         return Status;
     }
+    KiDrawDebugRect(1);
 
     KDebugPrint("__AcpiInitTables__");
     Status = AcpiInitializeTables(
@@ -61,28 +65,36 @@ NSTATUS NOSAPI DriverEntry(
     );
     if(Status != AE_OK) return Status;
 
+    KiDrawDebugRect(2);
 
     // Initialize Required Kernel Tables
     if((Status = AcpiInitializeApicConfiguration()) != AE_OK) return Status;
+    KiDrawDebugRect(3);
     if((Status = AcpiInitializePcieConfiguration()) != AE_OK) return Status;
+    KiDrawDebugRect(4);
 
     // *** From here:
     if((Status = AcpiHpetInit()) != AE_OK) return Status;
 
+    KiDrawDebugRect(5);
 
     KDebugPrint("__AcpiLoadTables__");
     Status = AcpiLoadTables();
     if(Status != AE_OK) return Status;
+    KiDrawDebugRect(6);
+
 
     // *** To here should ideally take less than 1 second
 
     KDebugPrint("Completing secondary ACPI Tables initialization");
     // *** Now we will set IOAPIC Mode and enable interrupts in the kernel
     AcpiSubsystemSetIoApicMode();
+    KiDrawDebugRect(7);
 
     // Now we will execute the last step of kernel initialization
     KeSchedulingSystemInit();
 
+    KiDrawDebugRect(8);
 
     KDebugPrint("Tables:");
     ACPI_TABLE_HEADER* Table;
@@ -120,6 +132,6 @@ NSTATUS NOSAPI DriverEntry(
     AcpiIo.IoCallback = AcpiIoCallback;
 
     IoSetInterface(AcpiDevice, &AcpiIo);
-
+    KiDrawDebugRect(9);
     return STATUS_SUCCESS;
 }
